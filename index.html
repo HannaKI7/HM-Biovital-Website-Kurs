@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HM BIOVITAL — Premium Kosmetikinstitut Hannover</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ======================================================
+       RESET & CSS VARIABLES
+    ====================================================== */
+    *, *::before, *::after {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+
+    :root {
+      --bg:          #08090A;
+      --bg2:         #0E1012;
+      --bg3:         #141618;
+      --gold:        #C49A3A;
+      --gold-light:  #E2B96A;
+      --gold-dark:   #8B6220;
+      --cream:       #F0EAE0;
+      --cream-60:    rgba(240,234,224,0.6);
+      --cream-30:    rgba(240,234,224,0.3);
+      --border:      rgba(196,154,58,0.18);
+      --border-h:    rgba(196,154,58,0.42);
+      --display:     'Cormorant Garamond', serif;
+      --body:        'Jost', sans-serif;
+      --ease:        cubic-bezier(0.23,1,0.32,1);
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      background: var(--bg);
+      color: var(--cream);
+      font-family: var(--body);
+      font-weight: 300;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    img { display: block; max-width: 100%; }
+    a   { color: inherit; }
+
+    /* ======================================================
+       CUSTOM CURSOR
+    ====================================================== */
+    .c-dot {
+      position: fixed; width: 8px; height: 8px;
+      background: var(--gold); border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%,-50%);
+      transition: width .2s, height .2s, background .2s, opacity .3s;
+    }
+    .c-ring {
+      position: fixed; width: 38px; height: 38px;
+      border: 1px solid rgba(196,154,58,.45); border-radius: 50%;
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%,-50%);
+      transition: width .35s var(--ease), height .35s var(--ease), border-color .3s, opacity .3s;
+    }
+    body.ch .c-dot  { width: 12px; height: 12px; background: var(--gold-light); }
+    body.ch .c-ring { width: 58px; height: 58px; border-color: rgba(226,185,106,.6); }
+    body.cl .c-dot  { opacity: 0; }
+    body.cl .c-ring { opacity: 0; }
+
+    /* ======================================================
+       PRELOADER
+    ====================================================== */
+    #pl {
+      position: fixed; inset: 0; background: var(--bg);
+      z-index: 10000; display: flex; align-items: center;
+      justify-content: center; flex-direction: column; gap: 20px;
+      transition: opacity .9s var(--ease), visibility .9s;
+    }
+    #pl.gone { opacity: 0; visibility: hidden; pointer-events: none; }
+
+    .pl-logo {
+      font-family: var(--display); font-size: 2.2rem;
+      letter-spacing: .4em; font-weight: 300;
+      overflow: hidden;
+    }
+    .pl-logo span {
+      display: inline-block;
+      animation: plUp .65s var(--ease) both;
+    }
+    .pl-logo span:nth-child(1) { animation-delay: .15s; }
+    .pl-logo span:nth-child(2) { animation-delay: .3s; }
+    .pl-line {
+      height: 1px; background: var(--gold); width: 0;
+      animation: plLine .8s .7s var(--ease) forwards;
+    }
+    .pl-sub {
+      font-size: .6rem; letter-spacing: .45em; text-transform: uppercase;
+      color: var(--gold); opacity: 0;
+      animation: plFade .6s 1.1s forwards;
+    }
+
+    @keyframes plUp   { from { transform: translateY(110%); opacity: 0; } to { transform: none; opacity: 1; } }
+    @keyframes plLine { to   { width: 160px; } }
+    @keyframes plFade { to   { opacity: 1; } }
+
+    /* ======================================================
+       NAVIGATION
+    ====================================================== */
+    #nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+      padding: 30px 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(8,9,10,1);
+      transition: background .4s, backdrop-filter .4s, padding .4s, border-color .4s;
+      border-bottom: 1px solid var(--border);
+    }
+    #nav.scrolled {
+      background: rgba(8,9,10,1);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      padding: 18px 64px;
+      border-color: var(--border);
+    }
+
+    .nav-logo {
+      text-decoration: none; display: flex; flex-direction: column; line-height: 1;
+    }
+    .nav-logo-main {
+      font-family: var(--display); font-size: 1.55rem;
+      letter-spacing: .32em; color: var(--cream); font-weight: 300;
+    }
+    .nav-logo-sub {
+      font-family: var(--body); font-size: .52rem;
+      letter-spacing: .42em; color: var(--gold); font-weight: 400;
+      text-transform: uppercase; margin-top: 3px;
+    }
+
+    .nav-links { display: flex; gap: 44px; list-style: none; }
+    .nav-links a {
+      text-decoration: none; color: var(--cream-60);
+      font-size: .7rem; letter-spacing: .22em; text-transform: uppercase;
+      font-weight: 400; transition: color .3s; position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -3px; left: 0;
+      width: 0; height: 1px; background: var(--gold); transition: width .3s;
+    }
+    .nav-links a:hover { color: var(--cream); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-btn {
+      display: inline-block; text-decoration: none;
+      font-family: var(--body); font-size: .68rem; letter-spacing: .22em;
+      text-transform: uppercase; font-weight: 400;
+      padding: 12px 30px; border: 1px solid var(--gold);
+      color: var(--gold); position: relative; overflow: hidden;
+      transition: color .35s;
+    }
+    .nav-btn::before {
+      content: ''; position: absolute; inset: 0;
+      background: var(--gold); transform: scaleX(0);
+      transform-origin: left; transition: transform .35s var(--ease);
+    }
+    .nav-btn:hover { color: var(--bg); }
+    .nav-btn:hover::before { transform: scaleX(1); }
+    .nav-btn span { position: relative; z-index: 1; }
+
+    /* Hamburger – mobile only */
+    .nav-ham {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: none; padding: 4px;
+    }
+    .nav-ham span {
+      display: block; width: 24px; height: 1px; background: var(--cream);
+      transition: transform .3s, opacity .3s;
+    }
+
+    /* ======================================================
+       HERO
+    ====================================================== */
+    #hero {
+      position: relative; height: 100vh; min-height: 680px;
+      display: flex; align-items: center; overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: url('hero image.jpg') right top / contain no-repeat;
+      background-color: var(--bg);
+      transform: scale(1);
+      transition: transform 9s var(--ease);
+    }
+    .hero-bg.ready { transform: scale(0.97); }
+    .hero-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to right,
+        rgba(8,9,10,1)   0%,
+        rgba(8,9,10,1)  18%,
+        rgba(8,9,10,.9) 25%,
+        rgba(8,9,10,.7) 32%,
+        rgba(8,9,10,.4) 40%,
+        rgba(8,9,10,.1) 48%,
+        rgba(8,9,10,0)  55%
+      );
+    }
+
+    .hero-inner {
+      position: relative; z-index: 2;
+      padding: 0 64px; max-width: 820px;
+    }
+
+    .hero-eyebrow {
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 32px;
+      opacity: 0; transform: translateY(18px);
+      animation: revUp .7s 1.3s var(--ease) forwards;
+    }
+    .hero-eyebrow-bar {
+      width: 38px; height: 1px; background: var(--gold);
+    }
+    .hero-eyebrow-txt {
+      font-size: .64rem; letter-spacing: .38em; text-transform: uppercase;
+      color: var(--gold); font-weight: 400;
+    }
+
+    .hero-title {
+      font-family: var(--display); font-weight: 300;
+      font-size: clamp(3.4rem, 6.5vw, 6.2rem);
+      line-height: 1.04; color: var(--cream);
+      margin-bottom: 30px;
+    }
+    .hero-title .ln { display: block; overflow: hidden; }
+    .hero-title .ln span {
+      display: block;
+      animation: slideUp .9s var(--ease) both;
+      opacity: 0;
+    }
+    .hero-title .ln:nth-child(1) span { animation-delay: 1.5s; }
+    .hero-title .ln:nth-child(2) span { animation-delay: 1.65s; }
+    .hero-title .ln:nth-child(3) span { animation-delay: 1.8s; }
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold-light);
+      text-shadow:
+        0 0 22px rgba(226,185,106,0.65),
+        0 0 55px rgba(196,154,58,0.35),
+        0 0 90px rgba(196,154,58,0.18);
+    }
+
+    .hero-desc {
+      font-size: .9rem; line-height: 1.8; color: var(--cream-60);
+      max-width: 440px; margin-bottom: 44px;
+      opacity: 0; transform: translateY(18px);
+      animation: revUp .7s 2.05s var(--ease) forwards;
+    }
+
+    .hero-btns {
+      display: flex; align-items: center; gap: 24px;
+      opacity: 0; transform: translateY(18px);
+      animation: revUp .7s 2.25s var(--ease) forwards;
+    }
+
+    /* Primary button */
+    .btn-pri {
+      display: inline-flex; align-items: center; gap: 10px;
+      text-decoration: none; background: var(--gold); color: var(--bg);
+      font-family: var(--body); font-size: .68rem; font-weight: 500;
+      letter-spacing: .24em; text-transform: uppercase;
+      padding: 18px 42px; position: relative; overflow: hidden;
+      transition: color .35s;
+    }
+    .btn-pri::before {
+      content: ''; position: absolute; inset: 0;
+      background: var(--gold-light); transform: translateX(-105%);
+      transition: transform .42s var(--ease);
+    }
+    .btn-pri:hover::before  { transform: translateX(0); }
+    .btn-pri > * { position: relative; z-index: 1; }
+
+    /* Ghost link */
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      text-decoration: none; color: var(--cream-60);
+      font-size: .68rem; letter-spacing: .22em; text-transform: uppercase;
+      font-weight: 400; padding: 18px 0;
+      border-bottom: 1px solid transparent;
+      transition: color .3s, border-color .3s, gap .3s;
+    }
+    .btn-ghost:hover { color: var(--cream); border-color: var(--border); gap: 14px; }
+
+    /* Scroll indicator */
+    .hero-scroll {
+      position: absolute; bottom: 48px; left: 64px; z-index: 2;
+      display: flex; align-items: center; gap: 12px;
+      opacity: 0; animation: revUp .7s 2.6s var(--ease) forwards;
+    }
+    .hero-scroll-bar {
+      width: 1px; height: 54px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: pulse 2.2s 3s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.25} }
+    .hero-scroll-lbl {
+      font-size: .58rem; letter-spacing: .4em; text-transform: uppercase;
+      color: var(--cream-30); writing-mode: vertical-rl;
+      transform: rotate(180deg);
+    }
+
+    /* ======================================================
+       KEYFRAME POOL
+    ====================================================== */
+    @keyframes revUp   { to { opacity:1; transform:none; } }
+    @keyframes slideUp { to { opacity:1; transform:none; } }
+    @keyframes lineGrow{ to { transform: scaleX(1); } }
+
+    /* ======================================================
+       SCROLL REVEAL
+    ====================================================== */
+    .rv {
+      opacity: 0; transform: translateY(44px);
+      transition: opacity .85s var(--ease), transform .85s var(--ease);
+    }
+    .rv.on  { opacity: 1; transform: none; }
+    .rv.d1  { transition-delay: .10s; }
+    .rv.d2  { transition-delay: .20s; }
+    .rv.d3  { transition-delay: .30s; }
+    .rv.d4  { transition-delay: .40s; }
+    .rv.d5  { transition-delay: .52s; }
+
+    /* ======================================================
+       MARQUEE
+    ====================================================== */
+    .marquee {
+      overflow: hidden;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 17px 0;
+    }
+    .marquee-track {
+      display: flex; white-space: nowrap;
+      animation: scroll 28s linear infinite;
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+    .mi {
+      display: inline-flex; align-items: center; gap: 22px;
+      padding: 0 28px;
+      font-family: var(--display); font-size: 1.05rem; font-style: italic;
+      color: var(--cream-60); letter-spacing: .04em;
+    }
+    .mi-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+    @keyframes scroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+    /* ======================================================
+       SHARED SECTION ATOMS
+    ====================================================== */
+    .sec { padding: 128px 64px; }
+    .sec-max { max-width: 1380px; margin: 0 auto; }
+
+    .label-row {
+      display: flex; align-items: center; gap: 14px; margin-bottom: 18px;
+    }
+    .label-bar { width: 30px; height: 1px; background: var(--gold); }
+    .label-txt {
+      font-size: .63rem; letter-spacing: .38em; text-transform: uppercase;
+      color: var(--gold); font-weight: 400;
+    }
+
+    .sec-title {
+      font-family: var(--display); font-size: clamp(2.4rem,4.2vw,3.9rem);
+      font-weight: 300; line-height: 1.14; color: var(--cream);
+    }
+    .sec-title em { font-style: italic; color: var(--gold-light); }
+
+    /* ======================================================
+       ABOUT
+    ====================================================== */
+    #about {
+      background: var(--bg);
+    }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 110px; align-items: center;
+    }
+
+    .about-visual { position: relative; }
+    .about-img {
+      width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: center top;
+      filter: brightness(.84) contrast(1.06);
+      display: block;
+    }
+    .about-frame {
+      position: absolute; inset: 18px;
+      border: 1px solid var(--border); pointer-events: none;
+    }
+    .about-badge {
+      position: absolute; bottom: -24px; right: -24px;
+      background: var(--gold); color: var(--bg); padding: 26px 30px;
+    }
+    .ab-num { font-family: var(--display); font-size: 3rem; font-weight: 500; line-height: 1; display: block; }
+    .ab-lbl { font-family: var(--body); font-size: .68rem; letter-spacing: .12em; display: block; margin-top: 4px; }
+
+    .about-text .sec-title { margin-bottom: 28px; }
+    .about-p { font-size: .88rem; line-height: 1.88; color: var(--cream-60); margin-bottom: 22px; }
+    .about-rule { width: 56px; height: 1px; background: var(--border); margin: 32px 0; }
+    .about-list { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+    .about-list li {
+      display: flex; align-items: center; gap: 12px;
+      font-size: .8rem; color: var(--cream-60); letter-spacing: .04em;
+    }
+    .about-list li::before {
+      content: ''; width: 20px; height: 1px; background: var(--gold); flex-shrink: 0;
+    }
+
+    /* ======================================================
+       SERVICES
+    ====================================================== */
+    #services { background: var(--bg2); }
+
+    .services-head {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      margin-bottom: 68px; flex-wrap: wrap; gap: 24px;
+    }
+
+    .services-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      border: 1px solid rgba(196,154,58,0.32);
+      background: rgba(196,154,58,0.32); gap: 1px;
+    }
+
+    .sc {
+      background: #131210; padding: 46px 40px 40px;
+      position: relative; overflow: hidden; transition: background .4s;
+      border-top: 2px solid rgba(196,154,58,0.28);
+    }
+    .sc::after {
+      content: ''; position: absolute; bottom: 0; left: 0;
+      height: 2px; width: 0;
+      background: linear-gradient(90deg, var(--gold-dark), var(--gold-light));
+      transition: width .55s var(--ease);
+    }
+    .sc:hover { background: #1c1a14; border-top-color: var(--gold); }
+    .sc:hover::after { width: 100%; }
+
+    .sc-num {
+      font-family: var(--display); font-size: 4.5rem; font-weight: 300;
+      color: rgba(196,154,58,.18); line-height: 1; margin-bottom: 14px;
+      transition: color .4s;
+    }
+    .sc:hover .sc-num { color: rgba(196,154,58,.38); }
+
+    .sc-icon {
+      width: 42px; height: 42px; margin-bottom: 22px;
+      color: var(--gold); opacity: 1;
+    }
+
+    .sc-title {
+      font-family: var(--display); font-size: 1.55rem; font-weight: 400;
+      color: var(--cream); margin-bottom: 13px; line-height: 1.2;
+    }
+    .sc-desc {
+      font-size: .8rem; line-height: 1.75; color: var(--cream-60); margin-bottom: 26px;
+    }
+    .sc-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: .65rem; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--gold); text-decoration: none; font-weight: 400;
+      transition: gap .3s;
+    }
+    .sc:hover .sc-link { gap: 14px; }
+
+    /* ======================================================
+       STATS
+    ====================================================== */
+    #stats { padding: 0; background: var(--bg); }
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(4,1fr);
+      border: 1px solid var(--border); background: var(--border); gap: 1px;
+    }
+    .stat {
+      background: var(--bg); padding: 56px 40px; text-align: center;
+    }
+    .stat-n {
+      font-family: var(--display); font-size: 4rem; font-weight: 300;
+      color: var(--gold); line-height: 1; display: block; margin-bottom: 12px;
+    }
+    .stat-l {
+      font-size: .68rem; letter-spacing: .28em; text-transform: uppercase;
+      color: var(--cream-60);
+    }
+
+    /* ======================================================
+       SIGNATURE (PARALLAX)
+    ====================================================== */
+    #sig {
+      position: relative; height: 88vh; min-height: 580px;
+      display: flex; align-items: center; overflow: hidden;
+    }
+    .sig-bg {
+      position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=1920&q=85') center / cover no-repeat;
+      background-attachment: fixed;
+    }
+    .sig-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to right,
+        rgba(8,9,10,.94) 40%,
+        rgba(8,9,10,.28) 100%
+      );
+    }
+    .sig-inner { position: relative; z-index: 2; padding: 0 64px; max-width: 740px; }
+    .sig-tag {
+      display: inline-block; font-size: .6rem; letter-spacing: .38em;
+      text-transform: uppercase; color: var(--gold);
+      border: 1px solid var(--border); padding: 8px 18px; margin-bottom: 30px;
+    }
+    .sig-title {
+      font-family: var(--display); font-size: clamp(2.8rem,5vw,5rem);
+      font-weight: 300; line-height: 1.1; color: var(--cream); margin-bottom: 28px;
+    }
+    .sig-title em { font-style: italic; color: var(--gold-light); }
+    .sig-desc {
+      font-size: .88rem; line-height: 1.82; color: var(--cream-60);
+      max-width: 470px; margin-bottom: 44px;
+    }
+
+    /* ======================================================
+       TESTIMONIALS
+    ====================================================== */
+    #testi { background: var(--bg2); }
+    .testi-head { text-align: center; margin-bottom: 70px; }
+    .testi-head .label-row { justify-content: center; }
+    .testi-grid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 20px;
+    }
+    .tc {
+      background: var(--bg); border: 1px solid var(--border);
+      padding: 44px 40px;
+      transition: border-color .4s, transform .4s;
+    }
+    .tc:hover { border-color: var(--border-h); transform: translateY(-5px); }
+    .tc-q {
+      font-family: var(--display); font-size: 4rem; color: var(--gold);
+      opacity: .2; line-height: .5; margin-bottom: 26px; display: block;
+    }
+    .tc-txt {
+      font-family: var(--display); font-size: 1.12rem; font-style: italic;
+      line-height: 1.68; color: var(--cream); margin-bottom: 28px;
+    }
+    .tc-auth { display: flex; align-items: center; gap: 14px; }
+    .tc-av {
+      width: 44px; height: 44px; border-radius: 50%; background: var(--gold-dark);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--display); font-size: 1.1rem; color: var(--cream);
+      flex-shrink: 0;
+    }
+    .tc-name { font-size: .78rem; font-weight: 500; letter-spacing: .1em; display: block; }
+    .tc-stars { color: var(--gold); font-size: .68rem; letter-spacing: .1em; margin-top: 2px; }
+
+    /* ======================================================
+       BOOKING / CONTACT
+    ====================================================== */
+    #booking { background: var(--bg); }
+    .booking-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 110px; align-items: start;
+    }
+    .booking-text .sec-title { margin-bottom: 22px; }
+    .booking-p { font-size: .88rem; line-height: 1.82; color: var(--cream-60); margin-bottom: 40px; }
+
+    .contact-list { display: flex; flex-direction: column; gap: 16px; }
+    .ci {
+      display: flex; align-items: flex-start; gap: 16px;
+      font-size: .82rem; color: var(--cream-60);
+    }
+    .ci-lbl {
+      font-size: .6rem; letter-spacing: .26em; text-transform: uppercase;
+      color: var(--gold); min-width: 58px; flex-shrink: 0; padding-top: 1px;
+    }
+
+    .form { display: flex; flex-direction: column; gap: 16px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .fg { display: flex; flex-direction: column; gap: 8px; }
+    .fg label {
+      font-size: .6rem; letter-spacing: .28em; text-transform: uppercase; color: var(--gold);
+    }
+    .fg input, .fg select, .fg textarea {
+      background: var(--bg2); border: 1px solid var(--border);
+      color: var(--cream); padding: 14px 18px;
+      font-family: var(--body); font-size: .84rem; font-weight: 300;
+      outline: none; transition: border-color .3s; -webkit-appearance: none; appearance: none;
+    }
+    .fg input:focus, .fg select:focus, .fg textarea:focus { border-color: var(--gold); }
+    .fg input::placeholder, .fg textarea::placeholder { color: rgba(240,234,224,.22); }
+    .fg textarea { resize: none; height: 96px; }
+    .fg select option { background: var(--bg2); }
+    .form-btn {
+      border: none; width: 100%; justify-content: center;
+      font-family: var(--body); font-weight: 500;
+    }
+
+    /* ======================================================
+       FOOTER
+    ====================================================== */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 88px 64px 40px;
+    }
+    .ft-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 64px; margin-bottom: 68px;
+    }
+    .ft-logo { font-family: var(--display); font-size: 1.8rem; letter-spacing: .32em; display: block; margin-bottom: 5px; }
+    .ft-logo-sub { font-size: .56rem; letter-spacing: .44em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 20px; }
+    .ft-about { font-size: .78rem; line-height: 1.85; color: var(--cream-60); }
+    .ft-col-h { font-size: .62rem; letter-spacing: .34em; text-transform: uppercase; color: var(--gold); margin-bottom: 22px; font-weight: 400; }
+    .ft-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .ft-list a { font-size: .8rem; color: var(--cream-60); text-decoration: none; transition: color .3s; }
+    .ft-list a:hover { color: var(--cream); }
+    .ft-hours { font-size: .8rem; color: var(--cream-60); line-height: 2.1; }
+    .ft-bottom {
+      border-top: 1px solid var(--border); padding-top: 28px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+    }
+    .ft-copy { font-size: .68rem; color: var(--cream-30); letter-spacing: .08em; }
+
+    /* ======================================================
+       RESPONSIVE
+    ====================================================== */
+    @media (max-width: 1120px) {
+      .about-grid         { grid-template-columns: 1fr; gap: 64px; }
+      .about-badge        { right: 0; }
+      .services-grid      { grid-template-columns: repeat(2,1fr); }
+      .stats-grid         { grid-template-columns: repeat(2,1fr); }
+      .testi-grid         { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
+      .booking-grid       { grid-template-columns: 1fr; gap: 64px; }
+      .ft-grid            { grid-template-columns: 1fr 1fr; gap: 44px; }
+    }
+
+    @media (max-width: 768px) {
+      #nav { padding: 20px 24px; }
+      #nav.scrolled { padding: 14px 24px; }
+      .nav-links, .nav-btn { display: none; }
+      .nav-ham { display: flex; }
+      .sec { padding: 80px 24px; }
+      .hero-inner, .hero-scroll { padding-left: 24px; }
+      .hero-scroll { left: 24px; }
+      .sig-inner { padding: 0 24px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .ft-grid { grid-template-columns: 1fr; gap: 40px; }
+      .services-head { flex-direction: column; align-items: flex-start; }
+      footer { padding: 64px 24px 36px; }
+      .ft-bottom { flex-direction: column; text-align: center; }
+      .sig-bg { background-attachment: scroll; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     CURSOR
+════════════════════════════════════════ -->
+<div class="c-dot" id="cDot"></div>
+<div class="c-ring" id="cRing"></div>
+
+<!-- ══════════════════════════════════════
+     PRELOADER
+════════════════════════════════════════ -->
+<div id="pl">
+  <div class="pl-logo">
+    <span>HM&nbsp;</span><span>BIOVITAL</span>
+  </div>
+  <div class="pl-line"></div>
+  <p class="pl-sub">Kosmetikinstitut Hannover</p>
+</div>
+
+<!-- ══════════════════════════════════════
+     NAVIGATION
+════════════════════════════════════════ -->
+<nav id="nav">
+  <a href="#" class="nav-logo">
+    <span class="nav-logo-main">HM BIOVITAL</span>
+    <span class="nav-logo-sub">Kosmetikinstitut Hannover</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">Über uns</a></li>
+    <li><a href="#services">Behandlungen</a></li>
+    <li><a href="#testi">Referenzen</a></li>
+    <li><a href="#booking">Kontakt</a></li>
+  </ul>
+  <a href="#booking" class="nav-btn"><span>Termin buchen</span></a>
+  <button class="nav-ham" aria-label="Menü">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ══════════════════════════════════════
+     HERO
+════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-bg" id="heroBg"></div>
+
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <span class="hero-eyebrow-bar"></span>
+      <span class="hero-eyebrow-txt">Premium Kosmetikinstitut — Hannover</span>
+    </div>
+
+    <h1 class="hero-title">
+      <span class="ln"><span>Schönheit,</span></span>
+      <span class="ln"><span>die <em>von innen</em></span></span>
+      <span class="ln"><span>erstrahlt.</span></span>
+    </h1>
+
+    <p class="hero-desc">
+      Modernste Behandlungstechnologien, vereint mit echter Leidenschaft für ästhetische Medizin. Ihr Wohlbefinden ist unsere höchste Kunst.
+    </p>
+
+    <div class="hero-btns">
+      <a href="#booking" class="btn-pri">
+        <span>Termin vereinbaren</span>
+        <span>→</span>
+      </a>
+      <a href="#services" class="btn-ghost">Alle Behandlungen →</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="hero-scroll-bar"></div>
+    <span class="hero-scroll-lbl">Entdecken</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     MARQUEE
+════════════════════════════════════════ -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span class="mi"><span class="mi-dot"></span>Laser Haarentfernung</span>
+    <span class="mi"><span class="mi-dot"></span>Botox &amp; Hyaluronsäure</span>
+    <span class="mi"><span class="mi-dot"></span>Carbon Laser Peeling</span>
+    <span class="mi"><span class="mi-dot"></span>PRP Vampire Lifting</span>
+    <span class="mi"><span class="mi-dot"></span>Microneedling</span>
+    <span class="mi"><span class="mi-dot"></span>Tattoo-Entfernung</span>
+    <span class="mi"><span class="mi-dot"></span>Zahnaufhellung</span>
+    <span class="mi"><span class="mi-dot"></span>Stretch Mark Therapie</span>
+    <!-- duplicate for seamless loop -->
+    <span class="mi"><span class="mi-dot"></span>Laser Haarentfernung</span>
+    <span class="mi"><span class="mi-dot"></span>Botox &amp; Hyaluronsäure</span>
+    <span class="mi"><span class="mi-dot"></span>Carbon Laser Peeling</span>
+    <span class="mi"><span class="mi-dot"></span>PRP Vampire Lifting</span>
+    <span class="mi"><span class="mi-dot"></span>Microneedling</span>
+    <span class="mi"><span class="mi-dot"></span>Tattoo-Entfernung</span>
+    <span class="mi"><span class="mi-dot"></span>Zahnaufhellung</span>
+    <span class="mi"><span class="mi-dot"></span>Stretch Mark Therapie</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     ABOUT
+════════════════════════════════════════ -->
+<section id="about" class="sec">
+  <div class="sec-max about-grid">
+
+    <!-- Visual -->
+    <div class="about-visual rv">
+      <img class="about-img"
+           src="https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=800&q=85"
+           alt="HM Biovital Behandlung">
+      <div class="about-frame"></div>
+      <div class="about-badge">
+        <span class="ab-num">10+</span>
+        <span class="ab-lbl">Jahre Erfahrung</span>
+      </div>
+    </div>
+
+    <!-- Text -->
+    <div class="about-text">
+      <div class="label-row rv">
+        <span class="label-bar"></span>
+        <span class="label-txt">Über HM Biovital</span>
+      </div>
+      <h2 class="sec-title rv d1">
+        Wo <em>Wissenschaft</em><br>auf Ästhetik trifft.
+      </h2>
+      <p class="about-p rv d2">
+        HM Biovital verbindet modernste medizinische Technologien mit einem ganzheitlichen Schönheitskonzept. In unserem Institut in Hannover-Herrenhausen erwartet Sie ein einzigartiges Behandlungserlebnis – individuell, professionell und nachhaltig wirksam.
+      </p>
+      <p class="about-p rv d3">
+        Unser eingespieltes Team aus ausgebildeten Kosmetikexpertinnen betreut Sie mit höchster Sorgfalt und verwendet ausschließlich zertifizierte Geräte und Wirkstoffe der neuesten Generation.
+      </p>
+      <div class="about-rule rv d3"></div>
+      <ul class="about-list rv d4">
+        <li>Zertifizierte Behandlungsmethoden</li>
+        <li>Individuell abgestimmte Therapiekonzepte</li>
+        <li>Neueste Lasergeräte &amp; Technologien</li>
+        <li>Persönliche Beratung &amp; Nachsorge</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SERVICES
+════════════════════════════════════════ -->
+<section id="services" class="sec">
+  <div class="sec-max services-inner">
+
+    <div class="services-head">
+      <div>
+        <div class="label-row rv">
+          <span class="label-bar"></span>
+          <span class="label-txt">Unsere Behandlungen</span>
+        </div>
+        <h2 class="sec-title rv d1">Premium <em>Behandlungen</em><br>für Ihr Wohlbefinden.</h2>
+      </div>
+      <a href="#booking" class="btn-ghost rv d2">Alle ansehen →</a>
+    </div>
+
+    <div class="services-grid">
+
+      <!-- 01 -->
+      <div class="sc rv">
+        <div class="sc-num">01</div>
+        <svg class="sc-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+          <circle cx="22" cy="22" r="17"/>
+          <line x1="22" y1="5" x2="22" y2="10"/>
+          <line x1="22" y1="34" x2="22" y2="39"/>
+          <line x1="5" y1="22" x2="10" y2="22"/>
+          <line x1="34" y1="22" x2="39" y2="22"/>
+          <circle cx="22" cy="22" r="5"/>
+        </svg>
+        <h3 class="sc-title">Laser Haarentfernung</h3>
+        <p class="sc-desc">Dauerhafte Haarentfernung mit modernster 3-Wellen-Diodenlaser-Technologie. Sanft, präzise und für alle Hauttypen geeignet.</p>
+        <a href="#booking" class="sc-link">Mehr erfahren →</a>
+      </div>
+
+      <!-- 02 -->
+      <div class="sc rv d1">
+        <div class="sc-num">02</div>
+        <svg class="sc-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+          <path d="M14 34 C14 34 8 27 8 19 C8 12 14 7 22 7 C30 7 36 12 36 19 C36 27 30 34 30 34"/>
+          <line x1="22" y1="34" x2="22" y2="38"/>
+          <line x1="16" y1="38" x2="28" y2="38"/>
+        </svg>
+        <h3 class="sc-title">Botox &amp; Hyaluronsäure</h3>
+        <p class="sc-desc">Präzise Faltenbehandlung und natürliche Volumengabe für ein frisches, jugendliches Erscheinungsbild mit sofort sichtbaren Ergebnissen.</p>
+        <a href="#booking" class="sc-link">Mehr erfahren →</a>
+      </div>
+
+      <!-- 03 -->
+      <div class="sc rv d2">
+        <div class="sc-num">03</div>
+        <svg class="sc-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+          <rect x="8" y="14" width="28" height="20" rx="2"/>
+          <line x1="22" y1="6" x2="22" y2="14"/>
+          <line x1="16" y1="8" x2="22" y2="14"/>
+          <line x1="28" y1="8" x2="22" y2="14"/>
+          <circle cx="22" cy="24" r="4"/>
+        </svg>
+        <h3 class="sc-title">Carbon Laser Peeling</h3>
+        <p class="sc-desc">Das Hollywood-Peeling für strahlend reine Haut. Verfeinert Poren, egalisiert den Teint und stimuliert die Kollagenproduktion nachhaltig.</p>
+        <a href="#booking" class="sc-link">Mehr erfahren →</a>
+      </div>
+
+      <!-- 04 -->
+      <div class="sc rv d1">
+        <div class="sc-num">04</div>
+        <svg class="sc-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+          <ellipse cx="22" cy="20" rx="12" ry="14"/>
+          <path d="M18 15 Q22 12 26 15" stroke-linecap="round"/>
+          <circle cx="22" cy="20" r="3"/>
+          <line x1="22" y1="34" x2="22" y2="39"/>
+        </svg>
+        <h3 class="sc-title">PRP Vampire Lifting</h3>
+        <p class="sc-desc">Hautverjüngung mit körpereigenem Blutserum. PRP aktiviert natürliche Regenerationsprozesse für sichtbar straffere, jüngere Haut.</p>
+        <a href="#booking" class="sc-link">Mehr erfahren →</a>
+      </div>
+
+      <!-- 05 -->
+      <div class="sc rv d2">
+        <div class="sc-num">05</div>
+        <svg class="sc-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+          <path d="M10 22 Q22 10 34 22 Q22 34 10 22Z"/>
+          <line x1="22" y1="10" x2="22" y2="34" stroke-dasharray="2 3"/>
+          <line x1="10" y1="22" x2="34" y2="22" stroke-dasharray="2 3"/>
+        </svg>
+        <h3 class="sc-title">Microneedling</h3>
+        <p class="sc-desc">Modernste Hautverfeinerung durch kontrollierte Mikrokanäle. Reduziert Narben, Falten und stimuliert die natürliche Kollagensynthese spürbar.</p>
+        <a href="#booking" class="sc-link">Mehr erfahren →</a>
+      </div>
+
+      <!-- 06 -->
+      <div class="sc rv d3">
+        <div class="sc-num">06</div>
+        <svg class="sc-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+          <rect x="6" y="20" width="32" height="14" rx="2"/>
+          <path d="M14 20 L14 15 Q14 9 22 9 Q30 9 30 15 L30 20"/>
+          <line x1="22" y1="24" x2="22" y2="30"/>
+          <line x1="19" y1="27" x2="25" y2="27"/>
+        </svg>
+        <h3 class="sc-title">Tattoo-Entfernung</h3>
+        <p class="sc-desc">Professionelle Entfernung per Picosekunden-Laser. Präzise und schonend – auch für schwierige Farben wie Blau, Violett und Gelb.</p>
+        <a href="#booking" class="sc-link">Mehr erfahren →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     STATS
+════════════════════════════════════════ -->
+<section id="stats" class="sec" style="padding:0;">
+  <div class="sec-max">
+    <div class="stats-grid">
+      <div class="stat rv">
+        <span class="stat-n" data-target="2500">0</span>
+        <span class="stat-l">Zufriedene Kunden</span>
+      </div>
+      <div class="stat rv d1">
+        <span class="stat-n" data-target="10">0</span>
+        <span class="stat-l">Jahre Erfahrung</span>
+      </div>
+      <div class="stat rv d2">
+        <span class="stat-n" data-target="12">0</span>
+        <span class="stat-l">Behandlungsarten</span>
+      </div>
+      <div class="stat rv d3">
+        <span class="stat-n" data-target="99" data-suffix="%">0</span>
+        <span class="stat-l">Weiterempfehlung</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SIGNATURE TREATMENT
+════════════════════════════════════════ -->
+<section id="sig">
+  <div class="sig-bg"></div>
+  <div class="sig-inner">
+    <span class="sig-tag rv">— Signature Treatment</span>
+    <h2 class="sig-title rv d1">
+      Diodenlaser —<br>die <em>neue Art</em> der<br>Haarentfernung.
+    </h2>
+    <p class="sig-desc rv d2">
+      Unser 3-Wellen-Diodenlaser vereint drei Wellenlängen für optimale Ergebnisse auf jedem Hauttyp. Schmerzarm, hochpräzise und dauerhaft effektiv – für Frauen und Männer gleichermaßen.
+    </p>
+    <a href="#booking" class="btn-pri rv d3">
+      <span>Jetzt Termin buchen</span>
+      <span>→</span>
+    </a>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     TESTIMONIALS
+════════════════════════════════════════ -->
+<section id="testi" class="sec">
+  <div class="sec-max">
+    <div class="testi-head">
+      <div class="label-row rv"><span class="label-bar"></span><span class="label-txt">Kundenstimmen</span></div>
+      <h2 class="sec-title rv d1">Was unsere <em>Kunden</em> sagen.</h2>
+    </div>
+
+    <div class="testi-grid">
+      <div class="tc rv">
+        <span class="tc-q">"</span>
+        <p class="tc-txt">Absolut professionelle Behandlung. Das Ergebnis nach der Laser-Haarentfernung hat meine Erwartungen weit übertroffen. Ich bin seit Jahren begeisterte Stammkundin!</p>
+        <div class="tc-auth">
+          <div class="tc-av">S</div>
+          <div>
+            <span class="tc-name">Sandra M.</span>
+            <div class="tc-stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tc rv d1">
+        <span class="tc-q">"</span>
+        <p class="tc-txt">Das Carbon Peeling hat meinen Teint komplett verändert. Meine Haut strahlt wie nie zuvor. Das Team ist unglaublich kompetent und warmherzig.</p>
+        <div class="tc-auth">
+          <div class="tc-av">K</div>
+          <div>
+            <span class="tc-name">Katharina L.</span>
+            <div class="tc-stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tc rv d2">
+        <span class="tc-q">"</span>
+        <p class="tc-txt">Mein Tattoo ist nach wenigen Sitzungen kaum noch sichtbar. Die Beratung war ehrlich und das Ergebnis ist sensationell. Absolute Weiterempfehlung!</p>
+        <div class="tc-auth">
+          <div class="tc-av">T</div>
+          <div>
+            <span class="tc-name">Thomas R.</span>
+            <div class="tc-stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     BOOKING / CONTACT
+════════════════════════════════════════ -->
+<section id="booking" class="sec">
+  <div class="sec-max booking-grid">
+
+    <div class="booking-text">
+      <div class="label-row rv">
+        <span class="label-bar"></span>
+        <span class="label-txt">Kontakt &amp; Buchung</span>
+      </div>
+      <h2 class="sec-title rv d1">
+        Bereit für Ihre<br><em>Transformation?</em>
+      </h2>
+      <p class="booking-p rv d2">
+        Vereinbaren Sie noch heute Ihren persönlichen Beratungstermin. Unser Team freut sich darauf, Sie kennenzulernen und die ideale Behandlung für Sie zu entwickeln.
+      </p>
+      <div class="contact-list rv d3">
+        <div class="ci">
+          <span class="ci-lbl">Adresse</span>
+          <span>Herrenhäuser Straße 76A<br>30419 Hannover</span>
+        </div>
+        <div class="ci">
+          <span class="ci-lbl">Telefon</span>
+          <span>+49 511 76371605</span>
+        </div>
+        <div class="ci">
+          <span class="ci-lbl">E-Mail</span>
+          <span>info@hm-biovital.de</span>
+        </div>
+        <div class="ci">
+          <span class="ci-lbl">Zeiten</span>
+          <span>Mo–Di, Do–Fr: 10–19 Uhr<br>Mi: 13–19 Uhr · Sa: 10–16 Uhr</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form rv d2">
+      <div class="form-row">
+        <div class="fg">
+          <label>Vorname</label>
+          <input type="text" placeholder="Max">
+        </div>
+        <div class="fg">
+          <label>Nachname</label>
+          <input type="text" placeholder="Mustermann">
+        </div>
+      </div>
+      <div class="fg">
+        <label>E-Mail</label>
+        <input type="email" placeholder="max@email.de">
+      </div>
+      <div class="fg">
+        <label>Telefon</label>
+        <input type="tel" placeholder="+49 …">
+      </div>
+      <div class="fg">
+        <label>Gewünschte Behandlung</label>
+        <select>
+          <option value="" disabled selected>Behandlung auswählen</option>
+          <option>Laser Haarentfernung</option>
+          <option>Botox &amp; Hyaluronsäure</option>
+          <option>Carbon Laser Peeling</option>
+          <option>PRP / Vampire Lifting</option>
+          <option>Microneedling</option>
+          <option>Tattoo-Entfernung</option>
+          <option>Zahnaufhellung</option>
+          <option>Stretch Mark Therapie</option>
+          <option>Andere / Erstberatung</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label>Nachricht (optional)</label>
+        <textarea placeholder="Ihre Nachricht …"></textarea>
+      </div>
+      <button type="button" class="btn-pri form-btn">
+        <span>Anfrage absenden</span>
+        <span>→</span>
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     FOOTER
+════════════════════════════════════════ -->
+<footer>
+  <div class="ft-grid">
+    <div>
+      <span class="ft-logo">HM BIOVITAL</span>
+      <span class="ft-logo-sub">Kosmetikinstitut Hannover</span>
+      <p class="ft-about">Premium Kosmetik und ästhetische Behandlungen in Hannover-Herrenhausen. Schönheit von innen und außen – individuell, professionell, nachhaltig.</p>
+    </div>
+    <div>
+      <p class="ft-col-h">Behandlungen</p>
+      <ul class="ft-list">
+        <li><a href="#">Laser Haarentfernung</a></li>
+        <li><a href="#">Botox &amp; Hyaluronsäure</a></li>
+        <li><a href="#">Carbon Laser Peeling</a></li>
+        <li><a href="#">PRP Vampire Lifting</a></li>
+        <li><a href="#">Microneedling</a></li>
+        <li><a href="#">Tattoo-Entfernung</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="ft-col-h">Institut</p>
+      <ul class="ft-list">
+        <li><a href="#about">Über uns</a></li>
+        <li><a href="#testi">Referenzen</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="impressum.html#impressum">Impressum</a></li>
+        <li><a href="impressum.html#datenschutz">Datenschutz</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="ft-col-h">Öffnungszeiten</p>
+      <p class="ft-hours">
+        Mo – Di: 10:00 – 19:00<br>
+        Mi: 13:00 – 19:00<br>
+        Do – Fr: 10:00 – 19:00<br>
+        Sa: 10:00 – 16:00<br>
+        So: Geschlossen
+      </p>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <span class="ft-copy">© 2026 HM Biovital · Herrenhäuser Straße 76A · 30419 Hannover</span>
+    <span class="ft-copy">Alle Rechte vorbehalten.</span>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════ -->
+<script>
+(function () {
+  'use strict';
+
+  /* ── PRELOADER ─────────────────────────────────────────── */
+  window.addEventListener('load', function () {
+    setTimeout(function () {
+      document.getElementById('pl').classList.add('gone');
+      document.getElementById('heroBg').classList.add('ready');
+    }, 2400);
+  });
+
+  /* ── CUSTOM CURSOR ──────────────────────────────────────── */
+  var dot  = document.getElementById('cDot');
+  var ring = document.getElementById('cRing');
+  var mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', function (e) {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx + 'px';
+    dot.style.top  = my + 'px';
+  });
+
+  document.addEventListener('mouseleave', function () { document.body.classList.add('cl'); });
+  document.addEventListener('mouseenter', function () { document.body.classList.remove('cl'); });
+
+  (function animRing() {
+    rx += (mx - rx) * 0.11;
+    ry += (my - ry) * 0.11;
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+    requestAnimationFrame(animRing);
+  })();
+
+  document.querySelectorAll('a, button, .sc').forEach(function (el) {
+    el.addEventListener('mouseenter', function () { document.body.classList.add('ch'); });
+    el.addEventListener('mouseleave', function () { document.body.classList.remove('ch'); });
+  });
+
+  /* ── STICKY NAV ────────────────────────────────────────── */
+  var nav = document.getElementById('nav');
+  window.addEventListener('scroll', function () {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  /* ── SCROLL REVEAL ──────────────────────────────────────── */
+  var rvEls = document.querySelectorAll('.rv');
+  if ('IntersectionObserver' in window) {
+    var rvObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('on');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -48px 0px' });
+    rvEls.forEach(function (el) { rvObs.observe(el); });
+  } else {
+    rvEls.forEach(function (el) { el.classList.add('on'); });
+  }
+
+  /* ── COUNTER ANIMATION ──────────────────────────────────── */
+  var counters = document.querySelectorAll('.stat-n[data-target]');
+  if ('IntersectionObserver' in window) {
+    var cntObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting || entry.target.dataset.done) return;
+        entry.target.dataset.done = '1';
+        var target   = +entry.target.dataset.target;
+        var suffix   = entry.target.dataset.suffix || '+';
+        var duration = 1800;
+        var step     = target / (duration / 16);
+        var current  = 0;
+        var iv = setInterval(function () {
+          current = Math.min(current + step, target);
+          entry.target.textContent = Math.floor(current) + (current >= target ? suffix : '');
+          if (current >= target) clearInterval(iv);
+        }, 16);
+      });
+    }, { threshold: 0.55 });
+    counters.forEach(function (c) { cntObs.observe(c); });
+  }
+
+  /* ── SMOOTH SCROLL ──────────────────────────────────────── */
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var id = a.getAttribute('href');
+      if (id.length < 2) return;
+      var target = document.querySelector(id);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  /* ── PARALLAX HERO TEXT (subtle) ───────────────────────── */
+  window.addEventListener('scroll', function () {
+    var y = window.scrollY;
+    var heroInner = document.querySelector('.hero-inner');
+    if (heroInner) {
+      heroInner.style.transform = 'translateY(' + (y * 0.28) + 'px)';
+      heroInner.style.opacity   = 1 - y / 600;
+    }
+  }, { passive: true });
+
+})();
+</script>
+</body>
+</html>
