@@ -1143,28 +1143,31 @@
       </div>
     </div>
 
-    <div class="form rv d2">
+    <form class="form rv d2" id="contact-form">
+      <input type="hidden" name="access_key" value="040223b8-55b9-4345-90ff-699d5906885b">
+      <input type="hidden" name="subject" value="Neue Terminanfrage – HM BIOVITAL">
+      <input type="hidden" name="from_name" value="HM BIOVITAL Website">
       <div class="form-row">
         <div class="fg">
           <label>Vorname</label>
-          <input type="text" placeholder="Max">
+          <input type="text" name="vorname" placeholder="Max" required>
         </div>
         <div class="fg">
           <label>Nachname</label>
-          <input type="text" placeholder="Mustermann">
+          <input type="text" name="nachname" placeholder="Mustermann" required>
         </div>
       </div>
       <div class="fg">
         <label>E-Mail</label>
-        <input type="email" placeholder="max@email.de">
+        <input type="email" name="email" placeholder="max@email.de" required>
       </div>
       <div class="fg">
         <label>Telefon</label>
-        <input type="tel" placeholder="+49 …">
+        <input type="tel" name="telefon" placeholder="+49 …">
       </div>
       <div class="fg">
         <label>Gewünschte Behandlung</label>
-        <select>
+        <select name="behandlung" required>
           <option value="" disabled selected>Behandlung auswählen</option>
           <option>Laser Haarentfernung</option>
           <option>Botox &amp; Hyaluronsäure</option>
@@ -1179,13 +1182,14 @@
       </div>
       <div class="fg">
         <label>Nachricht (optional)</label>
-        <textarea placeholder="Ihre Nachricht …"></textarea>
+        <textarea name="nachricht" placeholder="Ihre Nachricht …"></textarea>
       </div>
-      <button type="button" class="btn-pri form-btn">
-        <span>Anfrage absenden</span>
-        <span>→</span>
+      <button type="submit" class="btn-pri form-btn" id="form-btn">
+        <span id="form-btn-text">Anfrage absenden</span>
+        <span id="form-btn-arrow">→</span>
       </button>
-    </div>
+      <p id="form-msg" style="display:none; text-align:center; font-size:.8rem; letter-spacing:.06em; margin-top:8px;"></p>
+    </form>
 
   </div>
 </section>
@@ -1345,6 +1349,41 @@
       heroInner.style.opacity   = 1 - y / 600;
     }
   }, { passive: true });
+
+  /* ── CONTACT FORM (Web3Forms) ───────────────────────────── */
+  var contactForm = document.getElementById('contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var btn = document.getElementById('form-btn');
+      var txt = document.getElementById('form-btn-text');
+      var msg = document.getElementById('form-msg');
+      btn.disabled = true;
+      txt.textContent = 'Wird gesendet …';
+      var data = new FormData(contactForm);
+      fetch('https://api.web3forms.com/submit', { method: 'POST', body: data })
+        .then(function(res) { return res.json(); })
+        .then(function(json) {
+          if (json.success) {
+            msg.style.color = 'var(--gold)';
+            msg.textContent = 'Vielen Dank! Wir melden uns in Kürze bei Ihnen.';
+            msg.style.display = 'block';
+            contactForm.reset();
+          } else {
+            throw new Error(json.message);
+          }
+        })
+        .catch(function() {
+          msg.style.color = '#e07070';
+          msg.textContent = 'Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.';
+          msg.style.display = 'block';
+        })
+        .finally(function() {
+          txt.textContent = 'Anfrage absenden';
+          btn.disabled = false;
+        });
+    });
+  }
 
 })();
 </script>
