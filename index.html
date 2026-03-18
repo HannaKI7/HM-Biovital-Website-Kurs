@@ -29,27 +29,8 @@
   <meta name="twitter:description" content="Ihr Premium Kosmetikinstitut in Hannover-Herrenhausen. Laser Haarentfernung, Botox, Carbon Peeling, PRP, Microneedling & Tattoo-Entfernung.">
   <meta name="twitter:image" content="https://www.hm-biovital.de/hero%20image.jpg">
 
-  <!-- Meta Pixel -->
-  <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '186671389072607');
-    fbq('track', 'PageView');
-  </script>
-  <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=186671389072607&ev=PageView&noscript=1"
-  /></noscript>
-  <!-- End Meta Pixel -->
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <!-- Google Fonts: lokal eingebunden, kein Verbindungsaufbau zu Google-Servern -->
+  <link rel="stylesheet" href="fonts/fonts.css">
   <style>
     /* ======================================================
        RESET & CSS VARIABLES
@@ -698,6 +679,49 @@
       .ft-bottom { flex-direction: column; text-align: center; }
       .sig-bg { background-attachment: scroll; }
     }
+
+    /* ── COOKIE BANNER ─────────────────────────────────────── */
+    #hm-cookie-banner {
+      display: none;
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 99999;
+      background: #0E1012;
+      border-top: 1px solid rgba(193,162,100,.35);
+      padding: 24px 40px;
+      flex-wrap: wrap; align-items: center; gap: 20px;
+      opacity: 0; transform: translateY(16px);
+      transition: opacity .4s ease, transform .4s ease;
+    }
+    #hm-cookie-banner.hm-cb--visible {
+      opacity: 1; transform: translateY(0);
+    }
+    .hm-cb__text {
+      flex: 1 1 320px;
+      font-family: 'Jost', sans-serif; font-size: .78rem;
+      letter-spacing: .04em; line-height: 1.7;
+      color: rgba(240,234,224,.7);
+    }
+    .hm-cb__text a { color: #C1A264; text-decoration: underline; }
+    .hm-cb__text strong { color: rgba(240,234,224,.9); font-weight: 400; }
+    .hm-cb__btns {
+      display: flex; gap: 12px; flex-shrink: 0; flex-wrap: wrap;
+    }
+    .hm-cb__btn {
+      font-family: 'Jost', sans-serif; font-size: .65rem;
+      letter-spacing: .18em; text-transform: uppercase;
+      padding: 11px 24px; border: 1px solid #C1A264;
+      cursor: pointer; transition: background .25s, color .25s;
+      background: transparent; color: #C1A264;
+    }
+    .hm-cb__btn--accept {
+      background: #C1A264; color: #08090A;
+    }
+    .hm-cb__btn--accept:hover { background: #d4b47a; border-color: #d4b47a; }
+    .hm-cb__btn--decline:hover { background: rgba(193,162,100,.12); }
+    @media (max-width: 600px) {
+      #hm-cookie-banner { padding: 20px 24px; }
+      .hm-cb__btns { width: 100%; }
+      .hm-cb__btn { flex: 1; text-align: center; }
+    }
   </style>
 
   <!-- Structured Data: Local Business -->
@@ -1202,6 +1226,12 @@
         <label>Nachricht (optional)</label>
         <textarea name="nachricht" placeholder="Ihre Nachricht …"></textarea>
       </div>
+      <div class="fg" style="margin-top:4px;">
+        <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:.7rem;letter-spacing:.06em;color:rgba(240,234,224,.6);line-height:1.6;font-family:'Jost',sans-serif;">
+          <input type="checkbox" name="datenschutz" required style="flex-shrink:0;margin-top:3px;accent-color:#C1A264;width:14px;height:14px;">
+          Ich habe die <a href="impressum.html#datenschutz" target="_blank" style="color:#C1A264;text-decoration:underline;margin:0 3px;">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zur Bearbeitung meiner Anfrage zu. *
+        </label>
+      </div>
       <button type="submit" class="btn-pri form-btn" id="form-btn">
         <span id="form-btn-text">Anfrage absenden</span>
         <span id="form-btn-arrow">→</span>
@@ -1241,6 +1271,7 @@
         <li><a href="#">Blog</a></li>
         <li><a href="impressum.html#impressum">Impressum</a></li>
         <li><a href="impressum.html#datenschutz">Datenschutz</a></li>
+        <li><a href="#" id="hm-cookie-settings">Cookie-Einstellungen</a></li>
       </ul>
     </div>
     <div>
@@ -1259,6 +1290,20 @@
     <span class="ft-copy">Alle Rechte vorbehalten.</span>
   </div>
 </footer>
+
+<!-- ══════════════════════════════════════
+     COOKIE BANNER
+════════════════════════════════════════ -->
+<div id="hm-cookie-banner" role="dialog" aria-label="Cookie-Einstellungen">
+  <p class="hm-cb__text">
+    <strong>Ihre Privatsphäre liegt uns am Herzen.</strong><br>
+    Wir verwenden Cookies und den Meta Pixel, um unsere Reichweite zu analysieren und Ihnen relevante Inhalte zu zeigen. Mit Klick auf „Alle akzeptieren" stimmen Sie der Nutzung von Marketing-Cookies zu. Mehr dazu in unserer <a href="impressum.html#datenschutz">Datenschutzerklärung</a>.
+  </p>
+  <div class="hm-cb__btns">
+    <button id="hm-cookie-decline" class="hm-cb__btn hm-cb__btn--decline">Nur notwendige</button>
+    <button id="hm-cookie-accept" class="hm-cb__btn hm-cb__btn--accept">Alle akzeptieren</button>
+  </div>
+</div>
 
 <!-- ══════════════════════════════════════
      JAVASCRIPT
@@ -1405,5 +1450,6 @@
 
 })();
 </script>
+<script src="cookie-consent.js"></script>
 </body>
 </html>

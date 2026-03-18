@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>10 Tipps für jüngere Haut – Kostenloser Ratgeber | HM BIOVITAL</title>
+  <meta name="description" content="Hol dir jetzt kostenlos unsere 10 Experten-Tipps für jüngere, strahlendere Haut – direkt von Hannover's Premium Kosmetikinstitut.">
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- ================================================
+       TRACKING PLATZHALTER
+       Google Ads Conversion Tag: hier einfügen (Page View)
+       Meta Pixel: hier einfügen (Page View)
+  ================================================= -->
+
+  <!-- Google Fonts: lokal eingebunden, kein Verbindungsaufbau zu Google-Servern -->
+  <link rel="stylesheet" href="fonts/fonts.css">
+
+  <!-- ================================================
+       BREVO: Script-Tag hier einfügen (vor </head>)
+       Beispiel:
+       <script>
+         (function(s,i,b,c,o){...})(...);
+       </script>
+  ================================================= -->
+
+  <style>
+    /* ======================================================
+       RESET & CSS VARIABLES
+    ====================================================== */
+    *, *::before, *::after {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+
+    :root {
+      --bg:          #08090A;
+      --bg2:         #0E1012;
+      --bg3:         #141618;
+      --gold:        #C49A3A;
+      --gold-light:  #E2B96A;
+      --gold-dark:   #8B6220;
+      --cream:       #FFFFFF;
+      --cream-60:    rgba(255,255,255,0.65);
+      --cream-30:    rgba(255,255,255,0.42);
+      --border:      rgba(196,154,58,0.18);
+      --border-h:    rgba(196,154,58,0.42);
+      --display:     'Cormorant Garamond', serif;
+      --body:        'Jost', sans-serif;
+      --ease:        cubic-bezier(0.23,1,0.32,1);
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      background: var(--bg);
+      color: var(--cream);
+      font-family: var(--body);
+      font-weight: 300;
+      overflow-x: hidden;
+      cursor: none;
+      min-height: 100vh;
+    }
+
+    img { display: block; max-width: 100%; }
+    a   { color: inherit; text-decoration: none; }
+
+    /* ======================================================
+       CUSTOM CURSOR
+    ====================================================== */
+    .c-dot {
+      position: fixed; width: 8px; height: 8px;
+      background: var(--gold); border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%,-50%);
+      transition: width .2s, height .2s, background .2s, opacity .3s;
+    }
+    .c-ring {
+      position: fixed; width: 38px; height: 38px;
+      border: 1px solid rgba(196,154,58,.45); border-radius: 50%;
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%,-50%);
+      transition: width .35s var(--ease), height .35s var(--ease), border-color .3s, opacity .3s;
+    }
+    body.ch .c-dot  { width: 12px; height: 12px; background: var(--gold-light); }
+    body.ch .c-ring { width: 58px; height: 58px; border-color: rgba(226,185,106,.6); }
+    body.cl .c-dot  { opacity: 0; }
+    body.cl .c-ring { opacity: 0; }
+
+    /* ======================================================
+       KEYFRAMES
+    ====================================================== */
+    @keyframes revUp   { to { opacity:1; transform:none; } }
+    @keyframes fadeIn  { to { opacity:1; } }
+
+    /* ======================================================
+       SCROLL REVEAL
+    ====================================================== */
+    .rv {
+      opacity: 0; transform: translateY(32px);
+      transition: opacity .85s var(--ease), transform .85s var(--ease);
+    }
+    .rv.on  { opacity: 1; transform: none; }
+    .rv.d1  { transition-delay: .10s; }
+    .rv.d2  { transition-delay: .20s; }
+    .rv.d3  { transition-delay: .30s; }
+    .rv.d4  { transition-delay: .40s; }
+    .rv.d5  { transition-delay: .52s; }
+
+    /* ======================================================
+       HEADER (Logo only, no nav)
+    ====================================================== */
+    .funnel-header {
+      padding: 32px 24px;
+      display: flex; justify-content: center; align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .logo-link {
+      text-decoration: none; display: flex; flex-direction: column;
+      align-items: center; line-height: 1;
+    }
+    .logo-main {
+      font-family: var(--display); font-size: 1.55rem;
+      letter-spacing: .32em; color: var(--cream); font-weight: 300;
+    }
+    .logo-sub {
+      font-family: var(--body); font-size: .52rem;
+      letter-spacing: .42em; color: var(--gold); font-weight: 400;
+      text-transform: uppercase; margin-top: 4px;
+    }
+
+    /* ======================================================
+       HERO / MAIN SECTION
+    ====================================================== */
+    .optin-hero {
+      padding: 80px 24px 60px;
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .eyebrow-row {
+      display: inline-flex; align-items: center; gap: 14px;
+      margin-bottom: 28px;
+      opacity: 0; transform: translateY(16px);
+      animation: revUp .7s .3s var(--ease) forwards;
+    }
+    .eyebrow-bar { width: 30px; height: 1px; background: var(--gold); }
+    .eyebrow-txt {
+      font-size: .62rem; letter-spacing: .38em; text-transform: uppercase;
+      color: var(--gold); font-weight: 400;
+    }
+
+    .optin-headline {
+      font-family: var(--display); font-weight: 300;
+      font-size: clamp(2.8rem, 6vw, 5.2rem);
+      line-height: 1.08; color: var(--cream);
+      margin-bottom: 24px;
+      opacity: 0; transform: translateY(20px);
+      animation: revUp .8s .5s var(--ease) forwards;
+    }
+    .optin-headline em {
+      font-style: italic;
+      color: var(--gold-light);
+      text-shadow:
+        0 0 22px rgba(226,185,106,0.55),
+        0 0 55px rgba(196,154,58,0.28);
+    }
+
+    .optin-subline {
+      font-size: clamp(.88rem, 2vw, 1rem);
+      line-height: 1.82; color: var(--cream-60);
+      max-width: 540px; margin: 0 auto 48px;
+      opacity: 0; transform: translateY(16px);
+      animation: revUp .7s .7s var(--ease) forwards;
+    }
+
+    /* ======================================================
+       BENEFITS LIST
+    ====================================================== */
+    .benefits {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 14px;
+      max-width: 480px; margin: 0 auto 52px;
+      text-align: left;
+      opacity: 0; transform: translateY(16px);
+      animation: revUp .7s .85s var(--ease) forwards;
+    }
+    .benefits li {
+      display: flex; align-items: flex-start; gap: 14px;
+      font-size: .88rem; line-height: 1.65; color: var(--cream-60);
+    }
+    .benefit-icon {
+      flex-shrink: 0; width: 22px; height: 22px; margin-top: 1px;
+      border: 1px solid var(--gold); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold); font-size: .7rem;
+    }
+
+    /* ======================================================
+       CTA BUTTON + PRIVACY NOTE
+    ====================================================== */
+    .cta-wrap {
+      opacity: 0; transform: translateY(20px);
+      animation: revUp .8s 1.05s var(--ease) forwards;
+      display: flex; flex-direction: column; align-items: center; gap: 18px;
+    }
+
+    .btn-pri {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--gold); color: var(--bg);
+      font-family: var(--body); font-size: .72rem; font-weight: 500;
+      letter-spacing: .24em; text-transform: uppercase;
+      padding: 20px 52px; border: none;
+      position: relative; overflow: hidden;
+      transition: color .35s; cursor: none;
+    }
+    .btn-pri::before {
+      content: ''; position: absolute; inset: 0;
+      background: var(--gold-light); transform: translateX(-105%);
+      transition: transform .42s var(--ease);
+    }
+    .btn-pri:hover::before { transform: translateX(0); }
+    .btn-pri > * { position: relative; z-index: 1; }
+
+    .privacy-note {
+      font-size: .72rem; letter-spacing: .04em; color: var(--cream-30);
+      line-height: 1.6; text-align: center;
+    }
+    .privacy-note a {
+      color: var(--gold); text-decoration: none; border-bottom: 1px solid transparent;
+      transition: border-color .3s;
+    }
+    .privacy-note a:hover { border-color: var(--gold); }
+
+    /* ======================================================
+       MODAL OVERLAY
+    ====================================================== */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 8000;
+      background: rgba(8,9,10,0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px;
+      opacity: 0; visibility: hidden;
+      transition: opacity .4s var(--ease), visibility .4s;
+    }
+    .modal-overlay.open {
+      opacity: 1; visibility: visible;
+    }
+
+    .modal-box {
+      background: var(--bg2);
+      border: 1px solid var(--border-h);
+      position: relative;
+      width: 100%; max-width: 580px;
+      transform: translateY(32px) scale(0.97);
+      transition: transform .45s var(--ease);
+      overflow: hidden;
+    }
+    .modal-overlay.open .modal-box {
+      transform: none;
+    }
+
+    .modal-header {
+      padding: 24px 28px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .modal-title {
+      font-family: var(--display); font-size: 1.35rem; font-weight: 300;
+      color: var(--cream); letter-spacing: .04em;
+    }
+    .modal-title em { font-style: italic; color: var(--gold-light); }
+
+    .modal-close {
+      background: none; border: none;
+      width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--cream-30); cursor: none;
+      transition: color .25s; flex-shrink: 0;
+    }
+    .modal-close:hover { color: var(--cream); }
+    .modal-close svg { width: 18px; height: 18px; }
+
+    .modal-body {
+      padding: 0;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .modal-body iframe {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      border: none;
+    }
+
+    .modal-privacy {
+      padding: 14px 28px 20px;
+      font-size: .7rem; color: var(--cream-30); line-height: 1.6;
+      text-align: center; border-top: 1px solid var(--border);
+    }
+    .modal-privacy a {
+      color: var(--gold); text-decoration: none; border-bottom: 1px solid transparent;
+      transition: border-color .3s;
+    }
+    .modal-privacy a:hover { border-color: var(--gold); }
+
+    /* ======================================================
+       TRUST SECTION
+    ====================================================== */
+    .trust-bar {
+      border-top: 1px solid var(--border);
+      padding: 48px 24px;
+      text-align: center;
+    }
+    .trust-inner {
+      max-width: 680px; margin: 0 auto;
+      display: flex; justify-content: center; align-items: center;
+      gap: 48px; flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+    }
+    .trust-num {
+      font-family: var(--display); font-size: 2rem; font-weight: 300;
+      color: var(--gold-light); line-height: 1;
+    }
+    .trust-lbl {
+      font-size: .68rem; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--cream-60); font-weight: 400;
+    }
+    .trust-divider {
+      width: 1px; height: 40px; background: var(--border);
+    }
+
+    /* ======================================================
+       FOOTER (minimal)
+    ====================================================== */
+    .funnel-footer {
+      border-top: 1px solid var(--border);
+      padding: 24px;
+      text-align: center;
+      display: flex; justify-content: center; align-items: center;
+      gap: 24px; flex-wrap: wrap;
+    }
+    .funnel-footer a, .funnel-footer span {
+      font-size: .68rem; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--cream-30); transition: color .3s;
+    }
+    .funnel-footer a:hover { color: var(--gold); }
+    .funnel-footer .ft-sep {
+      width: 1px; height: 12px; background: var(--border);
+    }
+
+    /* ======================================================
+       RESPONSIVE
+    ====================================================== */
+    @media (max-width: 600px) {
+      .optin-hero { padding: 56px 20px 48px; }
+      .trust-inner { gap: 24px; }
+      .trust-divider { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="c-dot" id="cDot"></div>
+<div class="c-ring" id="cRing"></div>
+
+<!-- ══════════════════════════════════════
+     HEADER
+════════════════════════════════════════ -->
+<header class="funnel-header">
+  <a href="index.html" class="logo-link">
+    <span class="logo-main">HM BIOVITAL</span>
+    <span class="logo-sub">Kosmetikinstitut Hannover</span>
+  </a>
+</header>
+
+<!-- ══════════════════════════════════════
+     MAIN CONTENT
+════════════════════════════════════════ -->
+<main>
+  <div class="optin-hero">
+
+    <!-- Eyebrow -->
+    <div class="eyebrow-row">
+      <span class="eyebrow-bar"></span>
+      <span class="eyebrow-txt">Kostenloser Ratgeber</span>
+      <span class="eyebrow-bar"></span>
+    </div>
+
+    <!-- Headline -->
+    <h1 class="optin-headline">
+      10 Tipps für<br><em>jüngere Haut</em>
+    </h1>
+
+    <!-- Subline -->
+    <p class="optin-subline">
+      Entdecke die Geheimnisse unserer Experten aus dem Premium Kosmetikinstitut Hannover –
+      direkt in deiner Inbox. Kostenlos, sofort und ohne Risiko.
+    </p>
+
+    <!-- Benefits -->
+    <ul class="benefits rv">
+      <li>
+        <span class="benefit-icon">✓</span>
+        <span>Welche <strong>Inhaltsstoffe</strong> wirklich wirken – und welche du meiden solltest</span>
+      </li>
+      <li>
+        <span class="benefit-icon">✓</span>
+        <span>Die <strong>tägliche Routine</strong>, die deine Haut sichtbar verjüngt</span>
+      </li>
+      <li>
+        <span class="benefit-icon">✓</span>
+        <span>Professionelle <strong>Behandlungs-Tipps</strong>, die du zu Hause anwenden kannst</span>
+      </li>
+      <li>
+        <span class="benefit-icon">✓</span>
+        <span>Wann eine <strong>professionelle Behandlung</strong> den entscheidenden Unterschied macht</span>
+      </li>
+    </ul>
+
+    <!-- CTA Button -->
+    <div class="cta-wrap">
+      <button class="btn-pri" id="openModal">
+        <span>Jetzt kostenlos erhalten</span>
+        <span>→</span>
+      </button>
+      <p class="privacy-note">
+        Kein Spam. Keine Weitergabe an Dritte. Jederzeit abmeldbar.<br>
+        Mit deiner Anmeldung stimmst du unserer
+        <a href="impressum.html#datenschutz">Datenschutzerklärung</a> zu.
+      </p>
+    </div>
+
+  </div>
+
+  <!-- Trust Bar -->
+  <div class="trust-bar rv">
+    <div class="trust-inner">
+      <div class="trust-item">
+        <span class="trust-num">2500+</span>
+        <span class="trust-lbl">Zufriedene Kunden</span>
+      </div>
+      <div class="trust-divider"></div>
+      <div class="trust-item">
+        <span class="trust-num">10</span>
+        <span class="trust-lbl">Jahre Erfahrung</span>
+      </div>
+      <div class="trust-divider"></div>
+      <div class="trust-item">
+        <span class="trust-num">99%</span>
+        <span class="trust-lbl">Weiterempfehlung</span>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ══════════════════════════════════════
+     MODAL
+════════════════════════════════════════ -->
+<div class="modal-overlay" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-box">
+    <div class="modal-header">
+      <span class="modal-title" id="modalTitle">Kostenlos anmelden &amp; <em>Ratgeber erhalten</em></span>
+      <button class="modal-close" id="closeModal" aria-label="Schließen">
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <line x1="3" y1="3" x2="15" y2="15"/>
+          <line x1="15" y1="3" x2="3" y2="15"/>
+        </svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <iframe width="540" height="305" src="https://ea8159a8.sibforms.com/serve/MUIFALaaYCGKtGFcA9RJyIAU-iX2MYSyeMNXg9pWvXKuOLtEVgTLYKXP6F_a1W6dpPimaPJhBuACM89gU8RCUqFYMf6_YjpZ3IbvlJjJRhxkp-rz3Xg9K9Ge9G-Q4w9MktMPhlQPjrJsW20RZ9kGBeiGXFucA2ioDqSADt_jhz5He6E-zOtplIk01JrLXH1YkIgdbTfs-h8ju7Ha" frameborder="0" scrolling="auto" allowfullscreen style="display: block;margin-left: auto;margin-right: auto;max-width: 100%;"></iframe>
+    </div>
+    <div class="modal-privacy">
+      Kein Spam. Keine Weitergabe an Dritte. Jederzeit abmeldbar.<br>
+      Mit deiner Anmeldung stimmst du unserer <a href="impressum.html#datenschutz">Datenschutzerklärung</a> zu.
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     FOOTER
+════════════════════════════════════════ -->
+<footer class="funnel-footer">
+  <span>© 2026 HM Biovital · Hannover</span>
+  <span class="ft-sep"></span>
+  <a href="impressum.html#impressum">Impressum</a>
+  <span class="ft-sep"></span>
+  <a href="impressum.html#datenschutz">Datenschutz</a>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ── CUSTOM CURSOR ──────────────────────────────────────── */
+  var dot  = document.getElementById('cDot');
+  var ring = document.getElementById('cRing');
+  var mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', function (e) {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx + 'px';
+    dot.style.top  = my + 'px';
+  });
+
+  document.addEventListener('mouseleave', function () { document.body.classList.add('cl'); });
+  document.addEventListener('mouseenter', function () { document.body.classList.remove('cl'); });
+
+  (function animRing() {
+    rx += (mx - rx) * 0.11;
+    ry += (my - ry) * 0.11;
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+    requestAnimationFrame(animRing);
+  })();
+
+  document.querySelectorAll('a, button').forEach(function (el) {
+    el.addEventListener('mouseenter', function () { document.body.classList.add('ch'); });
+    el.addEventListener('mouseleave', function () { document.body.classList.remove('ch'); });
+  });
+
+  /* Cursor auch über iframe deaktivieren (iframe blockiert sonst Maus-Events) */
+  document.querySelector('.modal-body iframe').addEventListener('mouseenter', function () {
+    document.body.classList.remove('ch');
+    document.body.classList.add('cl');
+  });
+  document.querySelector('.modal-body iframe').addEventListener('mouseleave', function () {
+    document.body.classList.remove('cl');
+  });
+
+  /* ── MODAL ──────────────────────────────────────────────── */
+  var modal      = document.getElementById('modal');
+  var openBtn    = document.getElementById('openModal');
+  var closeBtn   = document.getElementById('closeModal');
+
+  function openModal() {
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  openBtn.addEventListener('click', openModal);
+  closeBtn.addEventListener('click', closeModal);
+
+  modal.addEventListener('click', function (e) {
+    if (e.target === modal) closeModal();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+  });
+
+  /* ── SCROLL REVEAL ──────────────────────────────────────── */
+  var rvEls = document.querySelectorAll('.rv');
+  if ('IntersectionObserver' in window) {
+    var rvObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('on'); }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -32px 0px' });
+    rvEls.forEach(function (el) { rvObs.observe(el); });
+  } else {
+    rvEls.forEach(function (el) { el.classList.add('on'); });
+  }
+
+})();
+</script>
+</body>
+</html>

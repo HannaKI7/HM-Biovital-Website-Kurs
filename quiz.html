@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Dein Haut-Selbsttest — HM BIOVITAL</title>
+
+  <meta name="description" content="Finde heraus, welche Behandlung perfekt zu dir passt. Kostenloser Selbsttest von HM BIOVITAL Hannover.">
+  <meta property="og:title" content="Dein Haut-Selbsttest — HM BIOVITAL">
+  <meta property="og:description" content="Beantworte 6 kurze Fragen und erfahre, welche Behandlung perfekt zu dir passt.">
+  <meta property="og:image" content="https://www.hm-biovital.de/hero%20image.jpg">
+
+  <!-- Google Fonts: lokal eingebunden, kein Verbindungsaufbau zu Google-Servern -->
+  <link rel="stylesheet" href="fonts/fonts.css">
+
+  <style>
+    /* ======================================================
+       RESET & VARIABLES
+    ====================================================== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:          #08090A;
+      --bg2:         #0E1012;
+      --bg3:         #141618;
+      --gold:        #C49A3A;
+      --gold-light:  #E2B96A;
+      --gold-dark:   #8B6220;
+      --cream:       #FFFFFF;
+      --cream-60:    rgba(255,255,255,0.65);
+      --cream-30:    rgba(255,255,255,0.42);
+      --border:      rgba(196,154,58,0.18);
+      --border-h:    rgba(196,154,58,0.42);
+      --display:     'Cormorant Garamond', serif;
+      --body:        'Jost', sans-serif;
+      --ease:        cubic-bezier(0.23,1,0.32,1);
+    }
+
+    html {
+      font-size: 16px;
+      height: 100%;
+      background: var(--bg);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--cream);
+      font-family: var(--body);
+      font-weight: 300;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+    }
+
+    /* ======================================================
+       LAYOUT WRAPPER
+    ====================================================== */
+    .quiz-wrapper {
+      width: 100%;
+      max-width: 430px;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* ======================================================
+       HEADER BAR
+    ====================================================== */
+    .quiz-header {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 430px;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 20px 0;
+    }
+
+    .quiz-logo {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+      text-decoration: none;
+      margin-bottom: 14px;
+    }
+    .quiz-logo-main {
+      font-family: var(--display);
+      font-size: 1.15rem;
+      letter-spacing: .32em;
+      color: var(--cream);
+      font-weight: 300;
+    }
+    .quiz-logo-sub {
+      font-size: .48rem;
+      letter-spacing: .42em;
+      color: var(--gold);
+      font-weight: 400;
+      text-transform: uppercase;
+      margin-top: 2px;
+      font-family: var(--body);
+    }
+
+    /* ======================================================
+       PROGRESS BAR
+    ====================================================== */
+    .progress-wrap {
+      height: 2px;
+      background: var(--bg3);
+      position: relative;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold-dark), var(--gold-light));
+      width: 0%;
+      transition: width .5s var(--ease);
+    }
+    .progress-label {
+      font-size: .58rem;
+      letter-spacing: .18em;
+      color: var(--cream-30);
+      text-transform: uppercase;
+      padding: 8px 0 12px;
+    }
+
+    /* ======================================================
+       SCREENS
+    ====================================================== */
+    .screens-container {
+      padding-top: 100px; /* header height */
+      flex: 1;
+      position: relative;
+    }
+
+    .screen {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      padding: 28px 20px 100px;
+      min-height: calc(100dvh - 100px);
+      display: flex;
+      flex-direction: column;
+
+      /* hidden by default */
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(60px);
+      transition: opacity .4s var(--ease), transform .4s var(--ease);
+    }
+    .screen.active {
+      opacity: 1;
+      pointer-events: all;
+      transform: translateX(0);
+      position: relative;
+    }
+    .screen.exit-left {
+      opacity: 0;
+      transform: translateX(-60px);
+      pointer-events: none;
+    }
+
+    /* ======================================================
+       SCREEN 0 – INTRO
+    ====================================================== */
+    .intro-eyebrow {
+      font-size: .6rem;
+      letter-spacing: .38em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .intro-headline {
+      font-family: var(--display);
+      font-size: 2.6rem;
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--cream);
+      margin-bottom: 16px;
+    }
+    .intro-headline em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+    .intro-sub {
+      font-size: .82rem;
+      line-height: 1.7;
+      color: var(--cream-60);
+      margin-bottom: 32px;
+    }
+    .intro-badges {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 44px;
+    }
+    .badge {
+      font-size: .6rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      background: var(--bg2);
+    }
+    .intro-divider {
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 32px;
+    }
+
+    /* ======================================================
+       SCREEN 1–6 – QUESTIONS
+    ====================================================== */
+    .q-step {
+      font-size: .6rem;
+      letter-spacing: .28em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .q-headline {
+      font-family: var(--display);
+      font-size: 1.9rem;
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--cream);
+      margin-bottom: 28px;
+    }
+    .q-sub {
+      font-size: .75rem;
+      color: var(--cream-30);
+      margin-bottom: 24px;
+      margin-top: -20px;
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .option-btn {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+      min-height: 60px;
+      padding: 14px 18px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      color: var(--cream-60);
+      font-family: var(--body);
+      font-size: .82rem;
+      font-weight: 300;
+      letter-spacing: .04em;
+      text-align: left;
+      cursor: pointer;
+      transition: border-color .25s, color .25s, background .25s, transform .15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .option-btn:active {
+      transform: scale(0.985);
+    }
+    .option-btn:hover,
+    .option-btn.selected {
+      border-color: var(--gold);
+      color: var(--cream);
+      background: rgba(196,154,58,0.06);
+    }
+    .option-btn.selected {
+      border-color: var(--gold-light);
+    }
+
+    .option-icon {
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      width: 28px;
+      text-align: center;
+    }
+    .option-text {
+      flex: 1;
+    }
+    .option-label {
+      display: block;
+      font-weight: 400;
+      color: inherit;
+    }
+    .option-hint {
+      display: block;
+      font-size: .68rem;
+      color: var(--cream-30);
+      margin-top: 2px;
+    }
+    .option-btn.selected .option-hint {
+      color: var(--cream-60);
+    }
+
+    .option-check {
+      width: 18px;
+      height: 18px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color .25s, background .25s;
+    }
+    .option-btn.selected .option-check {
+      border-color: var(--gold);
+      background: var(--gold);
+    }
+    .option-check::after {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--bg);
+      opacity: 0;
+      transition: opacity .2s;
+    }
+    .option-btn.selected .option-check::after {
+      opacity: 1;
+    }
+
+    /* ======================================================
+       SCREEN 7 – LOADING
+    ====================================================== */
+    .loading-screen {
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 0;
+      padding-top: 60px;
+    }
+
+    .spinner-wrap {
+      position: relative;
+      width: 80px;
+      height: 80px;
+      margin-bottom: 36px;
+    }
+    .spinner-ring {
+      position: absolute;
+      inset: 0;
+      border: 1px solid var(--border);
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: spin 1.2s linear infinite;
+    }
+    .spinner-ring:nth-child(2) {
+      inset: 10px;
+      border-top-color: var(--gold-light);
+      animation-duration: 1.8s;
+      animation-direction: reverse;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .spinner-dot {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .spinner-dot::after {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    .loading-headline {
+      font-family: var(--display);
+      font-size: 1.7rem;
+      font-weight: 400;
+      color: var(--cream);
+      margin-bottom: 12px;
+    }
+    .loading-sub {
+      font-size: .75rem;
+      color: var(--cream-30);
+      line-height: 1.7;
+    }
+
+    .analysis-items {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+      max-width: 280px;
+    }
+    .analysis-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: .72rem;
+      color: var(--cream-30);
+      letter-spacing: .08em;
+    }
+    .analysis-item::before {
+      content: '';
+      width: 16px;
+      height: 1px;
+      background: var(--border);
+      flex-shrink: 0;
+      transition: background .4s, width .4s;
+    }
+    .analysis-item.done {
+      color: var(--gold);
+    }
+    .analysis-item.done::before {
+      background: var(--gold);
+      width: 24px;
+    }
+
+    /* ======================================================
+       SCREEN 8 – E-MAIL CAPTURE
+    ====================================================== */
+    .capture-eyebrow {
+      font-size: .6rem;
+      letter-spacing: .38em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .capture-headline {
+      font-family: var(--display);
+      font-size: 2.2rem;
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--cream);
+      margin-bottom: 12px;
+    }
+    .capture-sub {
+      font-size: .8rem;
+      color: var(--cream-60);
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .form-label {
+      font-size: .6rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--cream-30);
+    }
+    .form-input {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      color: var(--cream);
+      font-family: var(--body);
+      font-size: .9rem;
+      font-weight: 300;
+      padding: 16px 18px;
+      outline: none;
+      transition: border-color .25s;
+      -webkit-appearance: none;
+      border-radius: 0;
+    }
+    .form-input::placeholder { color: var(--cream-30); }
+    .form-input:focus { border-color: var(--gold); }
+
+    .form-privacy {
+      font-size: .62rem;
+      color: var(--cream-30);
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+    .form-privacy a { color: var(--gold); text-decoration: none; }
+
+    /* ======================================================
+       SCREEN 9 – RESULT
+    ====================================================== */
+    .result-top {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      padding: 28px 22px;
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .result-top::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold-dark), var(--gold-light));
+    }
+    .result-eyebrow {
+      font-size: .58rem;
+      letter-spacing: .32em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .result-treatment-icon {
+      font-size: 2.4rem;
+      margin-bottom: 12px;
+    }
+    .result-treatment-name {
+      font-family: var(--display);
+      font-size: 2rem;
+      font-weight: 400;
+      color: var(--cream);
+      margin-bottom: 14px;
+      line-height: 1.15;
+    }
+    .result-tagline {
+      font-size: .8rem;
+      color: var(--gold-light);
+      font-style: italic;
+      font-family: var(--display);
+      font-size: 1rem;
+      margin-bottom: 16px;
+    }
+    .result-desc {
+      font-size: .78rem;
+      color: var(--cream-60);
+      line-height: 1.8;
+    }
+
+    .result-why {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      padding: 20px 22px;
+      margin-bottom: 24px;
+    }
+    .result-why-title {
+      font-size: .58rem;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: var(--cream-30);
+      margin-bottom: 14px;
+    }
+    .result-why-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .result-why-list li {
+      font-size: .78rem;
+      color: var(--cream-60);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.5;
+    }
+    .result-why-list li::before {
+      content: '—';
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .result-ctas {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .result-restart {
+      text-align: center;
+      margin-top: 8px;
+    }
+    .result-restart button {
+      background: none;
+      border: none;
+      color: var(--cream-30);
+      font-family: var(--body);
+      font-size: .65rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* ======================================================
+       BUTTONS
+    ====================================================== */
+    .btn-primary {
+      display: block;
+      width: 100%;
+      padding: 18px 24px;
+      background: var(--gold);
+      color: var(--bg);
+      border: none;
+      font-family: var(--body);
+      font-size: .72rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      font-weight: 500;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      transition: background .25s, transform .15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn-primary:active { transform: scale(0.98); }
+    .btn-primary:hover { background: var(--gold-light); }
+
+    .btn-secondary {
+      display: block;
+      width: 100%;
+      padding: 18px 24px;
+      background: transparent;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      font-family: var(--body);
+      font-size: .72rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      font-weight: 400;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      transition: background .25s, color .25s, transform .15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn-secondary:active { transform: scale(0.98); }
+    .btn-secondary:hover { background: rgba(196,154,58,0.08); }
+
+    /* ======================================================
+       BOTTOM STICKY CTA (Questions)
+    ====================================================== */
+    .sticky-next {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 430px;
+      padding: 16px 20px 24px;
+      background: linear-gradient(to top, var(--bg) 70%, transparent);
+      z-index: 50;
+    }
+    .sticky-next .btn-primary {
+      opacity: 0.4;
+      pointer-events: none;
+      transition: opacity .3s, background .25s, transform .15s;
+    }
+    .sticky-next.ready .btn-primary {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    /* ======================================================
+       DECORATIVE ELEMENTS
+    ====================================================== */
+    .deco-line {
+      height: 1px;
+      background: var(--border);
+      margin: 24px 0;
+    }
+
+    .gold-rule {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+    .gold-rule::before,
+    .gold-rule::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .gold-rule span {
+      font-size: .5rem;
+      letter-spacing: .3em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+
+    /* ======================================================
+       RESPONSIVE (wider screens)
+    ====================================================== */
+    @media (min-width: 500px) {
+      .quiz-wrapper {
+        border-left: 1px solid var(--border);
+        border-right: 1px solid var(--border);
+      }
+      .quiz-header {
+        border-left: 1px solid var(--border);
+        border-right: 1px solid var(--border);
+      }
+      .sticky-next {
+        border-left: 1px solid var(--border);
+        border-right: 1px solid var(--border);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="quiz-wrapper">
+
+    <!-- HEADER -->
+    <header class="quiz-header">
+      <a href="index.html" class="quiz-logo">
+        <span class="quiz-logo-main">HM BIOVITAL</span>
+        <span class="quiz-logo-sub">Kosmetikinstitut Hannover</span>
+      </a>
+      <div class="progress-wrap">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <p class="progress-label" id="progressLabel">Dein persönlicher Haut-Check</p>
+    </header>
+
+    <!-- SCREENS CONTAINER -->
+    <div class="screens-container" id="screensContainer">
+
+      <!-- =====================================================
+           SCREEN 0 – INTRO
+      ===================================================== -->
+      <div class="screen active" id="screen-0">
+        <p class="intro-eyebrow">Kostenloser Selbsttest</p>
+        <h1 class="intro-headline">
+          Welche Behandlung passt<br><em>wirklich</em> zu dir?
+        </h1>
+        <p class="intro-sub">
+          Beantworte 6 kurze Fragen – und finde heraus, welche professionelle Behandlung optimal auf deine Haut, deine Ziele und deinen Alltag abgestimmt ist.
+        </p>
+        <div class="intro-badges">
+          <span class="badge">2 Minuten</span>
+          <span class="badge">100% kostenlos</span>
+          <span class="badge">Persönlich &amp; individuell</span>
+        </div>
+        <div class="intro-divider"></div>
+        <button class="btn-primary" onclick="goTo(1)">
+          <span>Jetzt starten</span>
+        </button>
+        <div style="margin-top: 20px; text-align: center;">
+          <p style="font-size: .65rem; color: var(--cream-30); letter-spacing: .1em;">
+            Bereits über 500 Empfehlungen ausgesprochen
+          </p>
+        </div>
+      </div>
+
+      <!-- =====================================================
+           SCREEN 1 – FRAGE 1
+      ===================================================== -->
+      <div class="screen" id="screen-1">
+        <p class="q-step">Frage 1 von 6</p>
+        <h2 class="q-headline">Was stört dich an deiner Haut am meisten?</h2>
+        <div class="options-list" id="opts-1">
+          <button class="option-btn" data-q="1" data-val="aging" onclick="selectOption(this, 1)">
+            <span class="option-icon">🕰️</span>
+            <span class="option-text">
+              <span class="option-label">Falten &amp; Alterungszeichen</span>
+              <span class="option-hint">Linien, schlaffe Haut, verlorene Konturen</span>
+            </span>
+            <span class="option-check"></span>
+          </button>
+          <button class="option-btn" data-q="1" data-val="hair" onclick="selectOption(this, 1)">
+            <span class="option-icon">✦</span>
+            <span class="option-text">
+              <span class="option-label">Unerwünschte Körperbehaarung</span>
+              <span class="option-hint">Beine, Achseln, Intim, Gesicht</span>
+            </span>
+            <span class="option-check"></span>
+          </button>
+          <button class="option-btn" data-q="1" data-val="skin" onclick="selectOption(this, 1)">
+            <span class="option-icon">🌿</span>
+            <span class="option-text">
+              <span class="option-label">Unreine Haut &amp; Poren</span>
+              <span class="option-hint">Pickel, Pigmentflecken, fahle Haut</span>
+            </span>
+            <span class="option-check"></span>
+          </button>
+          <button class="option-btn" data-q="1" data-val="tattoo" onclick="selectOption(this, 1)">
+            <span class="option-icon">◈</span>
+            <span class="option-text">
+              <span class="option-label">Ein Tattoo, das ich bereue</span>
+              <span class="option-hint">Vollständige oder teilweise Entfernung</span>
+            </span>
+            <span class="option-check"></span>
+          </button>
+          <button class="option-btn" data-q="1" data-val="volume" onclick="selectOption(this, 1)">
+            <span class="option-icon">◎</span>
+            <span class="option-text">
+              <span class="option-label">Volumenverlust &amp; Konturen</span>
+              <span class="option-hint">Wangen, Lippen, Tränenrinnen</span>
+            </span>
+            <span class="option-check"></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- =====================================================
+           SCREEN 2 – FRAGE 2
+      ===================================================== -->
+      <div class="screen" id="screen-2">
+        <p class="q-step">Frage 2 von 6</p>
+        <h2 class="q-headline">Wie würdest du dein Hautbild beschreiben?</h2>
+        <div class="options-list" id="opts-2">
+          <button class="option-btn" data-q="2" data-val="dry" onclick="selectOption(this, 2)">
+            <span class="option-icon">❄</span>
+            <span class="option-text">
+              <span class="option-label">Trocken &amp; sensibel</span>
+              <span class="option-hint">Reagiert schnell, braucht viel Pflege</span>
+            </span>
+            <span class="option-check"></span>
+          </button>
+          <button class="option-btn" data-q="2" data-val="normal" onclick="selectOption(this, 2)">
+            <span class="option-icon">◐</span>
+            <span class="option-text">
+              <span class="option-label">Normal bis gemischt</span>
+              <span class="option-hint">Meistens ausgeglichen, T-Zone etwas ölig</span>
+            </span>
+            <span class="option-check"></span>
+          </button>
+          <button class="option-btn" data-q="2" data-val="oily" onclick="selectOption(this, 2)">
+            <span class="option-icon">◉</span>
+            <span class="option-text">
+              <span class="option-label">Ölig &amp; zu Unreinheiten neigend</span>
+              <span class="option-hint">Glänzt, vergrößerte Poren, Mitesser</span>
+            </span>
+            <span class="option-check"></span>
+          </button>
+          <button class="option-btn" data-q="2" data-val="mature" onclick="selectOption(this, 2)">
+            <span class="option-icon">✦</span>
+            <span class="option-text">
+              <span class="option-label">Reif mit sichtbaren Falten</span>
+              <span class="option-hint">Erste oder tiefe Falten, Elastizitätsverlust</span>
+            </span>
+            <span class="option-check"></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- =====================================================
+           SCREEN 3 – FRAGE 3
+      ===================================================== -->
+      <div class="screen" id="screen-3">
+        <p class="q-step">Frage 3 von 6</p>
+        <h2 class="q-headline">Was ist dein wichtigstes Ziel?</h2>
+        <div class="options-list" id="opts-3">
+          <button class="option-btn" data-q="3" data-val="younger" onclick="selectOption(this, 3)">
+            <span class="option-icon">⟡</span>
+            <span class="option-text">
+              <span class="option-label">Jünger &amp; frischer wirken</span>
+              <span class="option-hint">Falten reduzieren, Haut straffen</span>
+            </span>
+            <span class="option-check"></span>
+          </button>
+          <button class="option-btn" data-q="3" data-val="smooth" onclick="selectOption(this, 3)">
+            <span class="option-icon">◇</span>
+            <span class="option-text">
+              <span class="option-label">Glatte, makellose Haut</span>
+              <span class="option-hint">Ebenmäßiger Teint, reine Poren</span>
+            </span>
+            <span class="option-check"></span>
+          </button>
+          <button class="option-btn" data-q="3" data-val="refresh" onclick="selectOption(this, 3)">
+            <span class="option-icon">✿</span>
+            <span class="option-text">
+              <span class="option-label">Natürliche Auffrischung</span>
+              <span class="option-hint">Strahlender Look, ohne dass man es „sieht"</span>
+            </span>
+            <span class="option-check"></span>
+          </button>
+          <button class="option-btn" data-q="3" data-val="hairfree" onclick="selectOption(this, 3)">
+            <span class="option-icon">✦</span>
+            <span class="option-text">
+              <span class="option-label">Dauerhaft haarf rei sein</span>
+              <span class="option-hint">Nie wieder rasieren oder wachsen</span>
+            </span>
+            <span class="option-check"></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- =====================================================
+           SCREEN 4 – FRAGE 4
+      ===================================================== -->
+      <div class="screen" id="screen-4">
+        <p class="q-step">Frage 4 von 6</p>
+        <h2 class="q-headline">Wie stehst du zu medizinischen Behandlungen?</h2>
+        <p class="q-sub">Keine falsche Antwort – nur ehrlich!</p>
+        <div class="options-list" id="opts-4">
+          <button class="option-btn" data-q="4" data-val="gentle" onclick="selectOption(this, 4)">
+            <span class="option-icon">🌿</span>
+            <span class="option-text">
+              <span class="option-label">Lieber sanft &amp; natürlich</span>
+              <span class="option-hint">Ohne Spritzen oder invasive Eingriffe</span>
+            </span>
+            <span class="option-check"></span>
+          </button>
+          <button class="option-btn" data-q="4" data-val="moderate" onclick="selectOption(this, 4)">
+            <span class="option-icon">◐</span>
+            <span class="option-text">
+              <span class="option-label">Etwas professionelle Unterstützung ist okay</span>
+              <span class="option-hint">Wenn Ergebnisse überzeugen, bin ich offen</span>
+            </span>
+            <span class="option-check"></span>
+          </button>
+          <button class="option-btn" data-q="4" data-val="max" onclick="selectOption(this, 4)">
+            <span class="option-icon">⟡</span>
+            <span class="option-text">
+              <span class="option-label">Maximale Ergebnisse gewünscht</span>
+              <span class="option-hint">Ich will das Beste – egal wie</span>
+            </span>
+            <span class="option-check"></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- =====================================================
+           SCREEN 5 – FRAGE 5
+      ===================================================== -->
+      <div class="screen" id="screen-5">
+        <p class="q-step">Frage 5 von 6</p>
+        <h2 class="q-headline">Wie viel Erholungszeit kannst du einplanen?</h2>
+        <div class="options-list" id="opts-5">
+          <button class="option-btn" data-q="5" data-val="none" onclick="selectOption(this, 5)">
+            <span class="option-icon">⚡</span>
+            <span class="option-text">
+              <span class="option-label">Keine – direkt danach weiter</span>
+              <span class="option-hint">Ich brauche sofort einsatzbereite Haut</span>
+            </span>
+            <span class="option-check"></span>
+          </button>
+          <button class="option-btn" data-q="5" data-val="little" onclick="selectOption(this, 5)">
+            <span class="option-icon">◎</span>
+            <span class="option-text">
+              <span class="option-label">1–2 Tage kann ich einplanen</span>
+              <span class="option-hint">Leichte Rötung oder Schwellung okay</span>
+            </span>
+            <span class="option-check"></span>
+          </button>
+          <button class="option-btn" data-q="5" data-val="week" onclick="selectOption(this, 5)">
+            <span class="option-icon">◈</span>
+            <span class="option-text">
+              <span class="option-label">Bis zu einer Woche möglich</span>
+              <span class="option-hint">Für die richtigen Ergebnisse nehme ich mir Zeit</span>
+            </span>
+            <span class="option-check"></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- =====================================================
+           SCREEN 6 – FRAGE 6
+      ===================================================== -->
+      <div class="screen" id="screen-6">
+        <p class="q-step">Frage 6 von 6</p>
+        <h2 class="q-headline">In welche Altersgruppe fällst du?</h2>
+        <div class="options-list" id="opts-6">
+          <button class="option-btn" data-q="6" data-val="young" onclick="selectOption(this, 6)">
+            <span class="option-icon">✦</span>
+            <span class="option-text">
+              <span class="option-label">18 – 25 Jahre</span>
+              <span class="option-hint">Prävention &amp; erste Behandlungen</span>
+            </span>
+            <span class="option-check"></span>
+          </button>
+          <button class="option-btn" data-q="6" data-val="mid" onclick="selectOption(this, 6)">
+            <span class="option-icon">◎</span>
+            <span class="option-text">
+              <span class="option-label">26 – 35 Jahre</span>
+              <span class="option-hint">Erste Zeichen sichtbar, aktiver Ansatz</span>
+            </span>
+            <span class="option-check"></span>
+          </button>
+          <button class="option-btn" data-q="6" data-val="upper-mid" onclick="selectOption(this, 6)">
+            <span class="option-icon">◐</span>
+            <span class="option-text">
+              <span class="option-label">36 – 45 Jahre</span>
+              <span class="option-hint">Korrektive Behandlungen, Verjüngung</span>
+            </span>
+            <span class="option-check"></span>
+          </button>
+          <button class="option-btn" data-q="6" data-val="mature" onclick="selectOption(this, 6)">
+            <span class="option-icon">⟡</span>
+            <span class="option-text">
+              <span class="option-label">46+ Jahre</span>
+              <span class="option-hint">Intensive Verjüngung, Anti-Aging</span>
+            </span>
+            <span class="option-check"></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- =====================================================
+           SCREEN 7 – LOADING
+      ===================================================== -->
+      <div class="screen loading-screen" id="screen-7">
+        <div class="spinner-wrap">
+          <div class="spinner-ring"></div>
+          <div class="spinner-ring"></div>
+          <div class="spinner-dot"></div>
+        </div>
+        <h2 class="loading-headline">Wir analysieren<br>dein Profil …</h2>
+        <p class="loading-sub">Einen Moment – wir gleichen deine<br>Antworten mit unseren Behandlungen ab.</p>
+        <div class="analysis-items" id="analysisItems">
+          <div class="analysis-item" id="ai-1">Hauttyp auswerten …</div>
+          <div class="analysis-item" id="ai-2">Ziele abgleichen …</div>
+          <div class="analysis-item" id="ai-3">Behandlung ermitteln …</div>
+          <div class="analysis-item" id="ai-4">Empfehlung vorbereiten …</div>
+        </div>
+      </div>
+
+      <!-- =====================================================
+           SCREEN 8 – E-MAIL CAPTURE
+      ===================================================== -->
+      <div class="screen" id="screen-8">
+        <p class="capture-eyebrow">Fast geschafft</p>
+        <h2 class="capture-headline">Dein Ergebnis<br>ist fertig.</h2>
+        <p class="capture-sub">
+          Gib deine E-Mail-Adresse ein – wir schicken dir deine persönliche Behandlungsempfehlung direkt zu.
+        </p>
+        <!-- action="#" = Platzhalter. Ersetze durch: action="https://formspree.io/f/DEINE_ID" -->
+        <form id="lead-form" action="#" method="POST" onsubmit="submitLead(event)">
+          <input type="hidden" name="_subject" value="Neuer Haut-Quiz Lead – HM BIOVITAL">
+          <div class="form-group">
+            <div class="form-field">
+              <label class="form-label" for="nameInput">Dein Vorname</label>
+              <input class="form-input" type="text" id="nameInput" name="name" placeholder="z. B. Laura" required autocomplete="given-name">
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="emailInput">Deine E-Mail-Adresse</label>
+              <input class="form-input" type="email" id="emailInput" name="email" placeholder="deine@email.de" required autocomplete="email">
+            </div>
+          </div>
+          <p class="form-privacy">
+            Mit der Eingabe stimmst du zu, dass wir dir dein Ergebnis und gelegentlich relevante Angebote per E-Mail senden dürfen. Kein Spam, jederzeit abbestellbar. <a href="#">Datenschutz</a>
+          </p>
+          <button type="submit" class="btn-primary">Jetzt Ergebnis anzeigen →</button>
+        </form>
+      </div>
+
+      <!-- =====================================================
+           SCREEN 9 – RESULT
+      ===================================================== -->
+      <div class="screen" id="screen-9">
+        <p class="capture-eyebrow" id="resultEyebrow">Deine persönliche Empfehlung</p>
+        <div class="result-top">
+          <div class="result-treatment-icon" id="resultIcon"></div>
+          <h2 class="result-treatment-name" id="resultName"></h2>
+          <p class="result-tagline" id="resultTagline"></p>
+          <p class="result-desc" id="resultDesc"></p>
+        </div>
+        <div class="result-why">
+          <p class="result-why-title">Warum passt das zu dir?</p>
+          <ul class="result-why-list" id="resultWhyList"></ul>
+        </div>
+        <div class="result-ctas">
+          <a href="https://www.hm-biovital.de/#kontakt" class="btn-primary">Kostenlosen Ersttermin buchen</a>
+          <a href="index.html#behandlungen" class="btn-secondary">Alle Behandlungen ansehen</a>
+        </div>
+        <div class="result-restart">
+          <button onclick="restart()">Quiz neu starten</button>
+        </div>
+      </div>
+
+    </div><!-- /screens-container -->
+
+    <!-- STICKY NEXT BUTTON (für Fragen 1–6) -->
+    <div class="sticky-next" id="stickyNext" style="display:none;">
+      <button class="btn-primary" id="nextBtn" onclick="nextFromQuestion()">Weiter</button>
+    </div>
+
+  </div><!-- /quiz-wrapper -->
+
+  <script>
+    /* ======================================================
+       STATE
+    ====================================================== */
+    let currentScreen = 0;
+    const totalQuestions = 6;
+    const answers = {}; // { 1: 'aging', 2: 'dry', ... }
+
+    const scores = {
+      laser:   0,
+      botox:   0,
+      hyaluron:0,
+      carbon:  0,
+      prp:     0,
+      micro:   0,
+      tattoo:  0
+    };
+
+    /* ======================================================
+       SCORING MAP
+       Each answer key adds points to treatment categories
+    ====================================================== */
+    const scoringMap = {
+      // Q1 – main concern
+      aging:   { botox: 3, prp: 2, micro: 2 },
+      hair:    { laser: 4 },
+      skin:    { carbon: 3, micro: 2 },
+      tattoo:  { tattoo: 5 },
+      volume:  { hyaluron: 4, prp: 1 },
+
+      // Q2 – skin type
+      dry:     { prp: 2, hyaluron: 2 },
+      normal:  { carbon: 1, micro: 1 },
+      oily:    { carbon: 3, micro: 1 },
+      mature:  { botox: 2, prp: 2, micro: 1 },
+
+      // Q3 – goal
+      younger:  { botox: 3, prp: 2 },
+      smooth:   { carbon: 3, micro: 2 },
+      refresh:  { prp: 3, micro: 2, hyaluron: 1 },
+      hairfree: { laser: 4 },
+
+      // Q4 – attitude towards treatment
+      gentle:   { laser: 1, carbon: 1, micro: 1 },
+      moderate: { micro: 1, prp: 1, carbon: 1 },
+      max:      { botox: 2, hyaluron: 2, prp: 1 },
+
+      // Q5 – downtime
+      none:   { laser: 1, carbon: 1 },
+      little: { micro: 1, prp: 1 },
+      week:   { botox: 1, hyaluron: 1, prp: 1 },
+
+      // Q6 – age
+      young:      { laser: 2, carbon: 1 },
+      mid:        { laser: 1, micro: 1, carbon: 1 },
+      'upper-mid': { botox: 1, prp: 2, micro: 1 },
+      mature:     { botox: 2, hyaluron: 2, prp: 2 }
+    };
+
+    /* ======================================================
+       RESULTS DATA
+    ====================================================== */
+    const results = {
+      laser: {
+        icon: '✦',
+        name: 'Laser Haarentfernung',
+        tagline: 'Einmal behandeln, dauerhaft glatt.',
+        desc: 'Mit modernster Lasertechnologie entfernen wir unerwünschte Haare dauerhaft und schmerzarm – an Beinen, Achseln, Intim, Gesicht und mehr. Das Ergebnis: seidenglatte Haut, die für immer bleibt.',
+        why: [
+          'Dein Hauptanliegen ist dauerhaft saubere, haarfreie Haut',
+          'Du möchtest kein aufwändiges Zuhause-Rasieren mehr',
+          'Laser ist schnell und braucht keine lange Erholungszeit'
+        ]
+      },
+      botox: {
+        icon: '⟡',
+        name: 'Botox',
+        tagline: 'Falten sanft in die Pause schicken.',
+        desc: 'Botox entspannt gezielt die Muskeln, die für Mimikfalten verantwortlich sind – Stirn, Zornesfalte, Krähenfüße. Das Ergebnis ist natürlich, frisch und hält 4–6 Monate.',
+        why: [
+          'Du möchtest sichtbar jünger und ausgeruhter wirken',
+          'Mimikfalten stören dich am meisten',
+          'Botox liefert präzise Ergebnisse ohne OP'
+        ]
+      },
+      hyaluron: {
+        icon: '◎',
+        name: 'Hyaluronsäure',
+        tagline: 'Volumen zurückbringen – natürlich.',
+        desc: 'Hyaluronfiller füllen verlorenes Volumen auf und modellieren Konturen neu – Wangen, Lippen, Tränenrinnen. Sofort sichtbar, natürlich und ohne Ausfallzeit.',
+        why: [
+          'Volumenverlust und schlaffe Konturen sind dein Thema',
+          'Du wünschst dir sofort sichtbare, natürliche Ergebnisse',
+          'Hyaluron braucht keine Erholungszeit'
+        ]
+      },
+      carbon: {
+        icon: '◈',
+        name: 'Carbon Laser Peeling',
+        tagline: 'Für den Hollywood-Glow.',
+        desc: 'Das Carbon Laser Peeling reinigt tiefe Poren, reduziert Talgdrüsen und hellt den Teint auf – in einer Sitzung. Perfekt für unreine, ölige oder fahle Haut. Kein Downtime nötig.',
+        why: [
+          'Dein Hautbild ist eher ölig oder zu Unreinheiten neigend',
+          'Du willst glatte, pore-arme Haut ohne lange Pause',
+          'Carbon Peeling zeigt sofort Ergebnisse'
+        ]
+      },
+      prp: {
+        icon: '◐',
+        name: 'PRP Vampire Lifting',
+        tagline: 'Natürliche Verjüngung mit deinem eigenen Blut.',
+        desc: 'Beim PRP-Verfahren wird dein eigenes Plasma gewonnen und in die Haut injiziert – für natürliche Regeneration, verbesserte Elastizität und einen strahlenden Teint. 100% biokompatibel.',
+        why: [
+          'Du schätzt natürliche Methoden ohne Fremdsubstanzen',
+          'Deine Haut braucht tiefe Regeneration und mehr Leuchtkraft',
+          'PRP stimuliert die körpereigene Kollagenproduktion'
+        ]
+      },
+      micro: {
+        icon: '✿',
+        name: 'Microneedling',
+        tagline: 'Tausende Micro-Impulse für neue Haut.',
+        desc: 'Microneedling setzt gezielte Micro-Verletzungen, die die Kollagenproduktion ankurbeln. Das Ergebnis: feinere Poren, weniger Narben, weniger Falten – Schicht für Schicht.',
+        why: [
+          'Du willst Haut- und Texturprobleme gezielt angehen',
+          'Eine natürliche, stufenweise Verbesserung ist dein Ansatz',
+          'Microneedling ist vielseitig und gut verträglich'
+        ]
+      },
+      tattoo: {
+        icon: '◇',
+        name: 'Tattoo-Entfernung',
+        tagline: 'Neuanfang für deine Haut.',
+        desc: 'Mit modernem Nd:YAG-Laser zerlegen wir Tintenpigmente schonend in kleinste Partikel – dein Körper baut sie danach ab. Schritt für Schritt verschwindet das Tattoo dauerhaft.',
+        why: [
+          'Du möchtest ein Tattoo vollständig oder teilweise entfernen',
+          'Die Laser-Technologie ist der sicherste Weg für dauerhafte Entfernung',
+          'Wir begleiten dich durch den gesamten Prozess'
+        ]
+      }
+    };
+
+    /* ======================================================
+       NAVIGATION
+    ====================================================== */
+    function goTo(index) {
+      const current = document.getElementById('screen-' + currentScreen);
+      const next    = document.getElementById('screen-' + index);
+      if (!next) return;
+
+      current.classList.remove('active');
+      current.classList.add('exit-left');
+      setTimeout(() => current.classList.remove('exit-left'), 500);
+
+      next.classList.add('active');
+      currentScreen = index;
+
+      updateProgress(index);
+      updateStickyNext(index);
+
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+
+    function updateProgress(screenIndex) {
+      const fill  = document.getElementById('progressFill');
+      const label = document.getElementById('progressLabel');
+
+      if (screenIndex === 0) {
+        fill.style.width = '0%';
+        label.textContent = 'Dein persönlicher Haut-Check';
+      } else if (screenIndex >= 1 && screenIndex <= 6) {
+        const pct = Math.round((screenIndex / totalQuestions) * 100);
+        fill.style.width = pct + '%';
+        label.textContent = 'Frage ' + screenIndex + ' von ' + totalQuestions;
+      } else if (screenIndex === 7) {
+        fill.style.width = '100%';
+        label.textContent = 'Analyse läuft …';
+      } else if (screenIndex === 8) {
+        fill.style.width = '100%';
+        label.textContent = 'Letzte Angabe';
+      } else if (screenIndex === 9) {
+        fill.style.width = '100%';
+        label.textContent = 'Dein Ergebnis';
+      }
+    }
+
+    function updateStickyNext(screenIndex) {
+      const sticky = document.getElementById('stickyNext');
+      if (screenIndex >= 1 && screenIndex <= 6) {
+        sticky.style.display = 'block';
+        // check if answer already selected
+        const alreadySelected = !!answers[screenIndex];
+        sticky.classList.toggle('ready', alreadySelected);
+      } else {
+        sticky.style.display = 'none';
+      }
+    }
+
+    function nextFromQuestion() {
+      if (!answers[currentScreen]) return;
+      if (currentScreen < 6) {
+        goTo(currentScreen + 1);
+      } else {
+        // After Q6, go to loading
+        goTo(7);
+        startLoading();
+      }
+    }
+
+    /* ======================================================
+       OPTION SELECTION
+    ====================================================== */
+    function selectOption(btn, questionIndex) {
+      // Deselect siblings
+      const opts = document.querySelectorAll('#opts-' + questionIndex + ' .option-btn');
+      opts.forEach(o => o.classList.remove('selected'));
+
+      // Select clicked
+      btn.classList.add('selected');
+
+      // Store answer
+      answers[questionIndex] = btn.dataset.val;
+
+      // Enable next button
+      const sticky = document.getElementById('stickyNext');
+      sticky.classList.add('ready');
+    }
+
+    /* ======================================================
+       LOADING ANIMATION
+    ====================================================== */
+    function startLoading() {
+      const items = ['ai-1', 'ai-2', 'ai-3', 'ai-4'];
+      items.forEach((id, i) => {
+        setTimeout(() => {
+          document.getElementById(id).classList.add('done');
+        }, 400 + i * 350);
+      });
+
+      // Calculate scores
+      calculateScores();
+
+      // Auto-advance after 2.2s
+      setTimeout(() => goTo(8), 2400);
+    }
+
+    /* ======================================================
+       SCORING CALCULATION
+    ====================================================== */
+    function calculateScores() {
+      // Reset
+      Object.keys(scores).forEach(k => scores[k] = 0);
+
+      // Apply answer scores
+      Object.values(answers).forEach(val => {
+        const map = scoringMap[val];
+        if (!map) return;
+        Object.entries(map).forEach(([treatment, pts]) => {
+          if (scores.hasOwnProperty(treatment)) scores[treatment] += pts;
+        });
+      });
+
+      console.log('Quiz scores:', JSON.stringify(scores));
+    }
+
+    /* ======================================================
+       LEAD FORM SUBMIT
+    ====================================================== */
+    function submitLead(e) {
+      e.preventDefault();
+
+      const name  = document.getElementById('nameInput').value.trim();
+      const email = document.getElementById('emailInput').value.trim();
+
+      // TODO: Bei Verwendung von Formspree – echten POST einbauen:
+      // const form = document.getElementById('lead-form');
+      // form.action = 'https://formspree.io/f/DEINE_ID';
+      // form.submit(); // dann redirect deaktivieren
+
+      showResult(name);
+    }
+
+    /* ======================================================
+       SHOW RESULT
+    ====================================================== */
+    function showResult(name) {
+      // Find winning treatment
+      const winner = Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
+      const data   = results[winner];
+      const firstName = name || 'du';
+
+      document.getElementById('resultEyebrow').textContent = 'Hallo ' + firstName + ' – deine Empfehlung';
+      document.getElementById('resultIcon').textContent = data.icon;
+      document.getElementById('resultName').textContent  = data.name;
+      document.getElementById('resultTagline').textContent = data.tagline;
+      document.getElementById('resultDesc').textContent  = data.desc;
+
+      const whyList = document.getElementById('resultWhyList');
+      whyList.innerHTML = '';
+      data.why.forEach(reason => {
+        const li = document.createElement('li');
+        li.textContent = reason;
+        whyList.appendChild(li);
+      });
+
+      goTo(9);
+    }
+
+    /* ======================================================
+       RESTART
+    ====================================================== */
+    function restart() {
+      Object.keys(answers).forEach(k => delete answers[k]);
+      Object.keys(scores).forEach(k => scores[k] = 0);
+
+      // Deselect all options
+      document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+
+      // Reset analysis items
+      document.querySelectorAll('.analysis-item').forEach(el => el.classList.remove('done'));
+
+      // Reset form
+      document.getElementById('lead-form').reset();
+
+      goTo(0);
+    }
+
+    /* ======================================================
+       INIT
+    ====================================================== */
+    updateProgress(0);
+  </script>
+
+</body>
+</html>

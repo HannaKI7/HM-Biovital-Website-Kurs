@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dauerhafte Laser Haarentfernung – HM BIOVITAL Hannover</title>
+  <meta name="description" content="Schluss mit Rasieren & Epilieren. Dauerhafte Haarentfernung mit Diodenlaser in Hannover. Jetzt Erstberatung sichern – kostenlos & unverbindlich.">
+  <!-- Google Fonts: lokal eingebunden, kein Verbindungsaufbau zu Google-Servern -->
+  <link rel="stylesheet" href="fonts/fonts.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #08090A;
+      --bg2: #0f1012;
+      --gold: #C49A3A;
+      --gold-light: #E2B96A;
+      --gold-dark: #8B6220;
+      --cream: #F0EAE0;
+      --cream-dim: rgba(240,234,224,0.6);
+      --border: rgba(196,154,58,0.2);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--cream);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── STICKY CTA BAR ── */
+    .sticky-cta {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 999;
+      padding: 12px 20px;
+      background: rgba(8,9,10,0.95);
+      border-top: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .sticky-cta a {
+      flex: 1;
+      text-align: center;
+      padding: 14px 10px;
+      border-radius: 2px;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .sticky-cta .btn-primary {
+      background: var(--gold);
+      color: var(--bg);
+    }
+    .sticky-cta .btn-secondary {
+      border: 1px solid var(--gold);
+      color: var(--gold);
+    }
+
+    /* ── NAV ── */
+    nav {
+      padding: 18px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    .nav-back {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      color: var(--cream-dim);
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 48px 24px 56px;
+      text-align: center;
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%; transform: translateX(-50%);
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, transparent, var(--gold));
+    }
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--border);
+      padding: 6px 16px;
+      margin-bottom: 28px;
+    }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 8vw, 3.6rem);
+      font-weight: 300;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--cream-dim);
+      max-width: 340px;
+      margin: 0 auto 36px;
+    }
+    .btn-gold {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--bg);
+      padding: 16px 32px;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.3s ease;
+    }
+    .btn-gold:hover { background: var(--gold-light); }
+    .hero-trust {
+      margin-top: 24px;
+      font-size: 0.75rem;
+      color: var(--cream-dim);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      margin: 0 24px;
+      opacity: 0.3;
+    }
+
+    /* ── PROBLEM ── */
+    .section { padding: 56px 24px; }
+    .section-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 6vw, 2.6rem);
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    .section h2 em { font-style: italic; color: var(--gold-light); }
+    .section p { color: var(--cream-dim); margin-bottom: 16px; }
+
+    .pain-list {
+      list-style: none;
+      margin-top: 28px;
+    }
+    .pain-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.95rem;
+      color: var(--cream-dim);
+    }
+    .pain-list li:last-child { border-bottom: none; }
+    .pain-icon {
+      width: 28px; height: 28px;
+      min-width: 28px;
+      border: 1px solid var(--gold-dark);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem;
+      color: var(--gold);
+      margin-top: 2px;
+    }
+
+    /* ── SOLUTION ── */
+    .solution-bg {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .solution-visual {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, #1a1008 0%, #0f0a04 50%, #1a1008 100%);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .solution-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 40%, rgba(196,154,58,0.12) 0%, transparent 70%);
+    }
+    .laser-icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      z-index: 1;
+    }
+    .laser-icon svg { width: 56px; height: 56px; opacity: 0.9; }
+    .laser-icon span {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+
+    /* ── STEPS ── */
+    .steps { counter-reset: step; }
+    .step {
+      display: flex;
+      gap: 20px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+      counter-increment: step;
+    }
+    .step:last-child { border-bottom: none; }
+    .step-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 300;
+      color: var(--gold);
+      opacity: 0.4;
+      line-height: 1;
+      min-width: 36px;
+    }
+    .step-content h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 400;
+      margin-bottom: 6px;
+    }
+    .step-content p { font-size: 0.9rem; color: var(--cream-dim); }
+
+    /* ── BENEFITS ── */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 28px;
+    }
+    .benefit-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      padding: 20px 16px;
+      text-align: center;
+    }
+    .benefit-card .icon {
+      font-size: 1.6rem;
+      margin-bottom: 10px;
+      display: block;
+    }
+    .benefit-card h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 400;
+      margin-bottom: 6px;
+    }
+    .benefit-card p { font-size: 0.78rem; color: var(--cream-dim); }
+
+    /* ── STATS ── */
+    .stats-row {
+      display: flex;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: 32px;
+    }
+    .stat {
+      flex: 1;
+      background: var(--bg2);
+      padding: 24px 12px;
+      text-align: center;
+    }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--gold);
+      display: block;
+    }
+    .stat-label { font-size: 0.7rem; color: var(--cream-dim); letter-spacing: 0.05em; }
+
+    /* ── PRICING ── */
+    .pricing-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      padding: 32px 24px;
+      margin-top: 28px;
+      position: relative;
+    }
+    .pricing-card.featured {
+      border-color: var(--gold);
+    }
+    .pricing-badge {
+      position: absolute;
+      top: -1px; right: 20px;
+      background: var(--gold);
+      color: var(--bg);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+    }
+    .pricing-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 300;
+      margin-bottom: 4px;
+    }
+    .pricing-card .zone {
+      font-size: 0.75rem;
+      color: var(--cream-dim);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .price-display {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .price-amount {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem;
+      font-weight: 300;
+      color: var(--gold);
+    }
+    .price-old {
+      font-size: 1rem;
+      color: var(--cream-dim);
+      text-decoration: line-through;
+    }
+    .price-note { font-size: 0.75rem; color: var(--cream-dim); margin-bottom: 20px; }
+    .pricing-list {
+      list-style: none;
+      margin-bottom: 24px;
+    }
+    .pricing-list li {
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.875rem;
+      color: var(--cream-dim);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .pricing-list li::before {
+      content: '✓';
+      color: var(--gold);
+      font-size: 0.7rem;
+    }
+    .btn-outline {
+      display: block;
+      width: 100%;
+      text-align: center;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 14px;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    .btn-outline:hover { background: var(--gold); color: var(--bg); }
+    .btn-gold-block {
+      display: block;
+      width: 100%;
+      text-align: center;
+      background: var(--gold);
+      color: var(--bg);
+      padding: 16px;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.3s ease;
+    }
+    .btn-gold-block:hover { background: var(--gold-light); }
+
+    /* ── TESTIMONIALS ── */
+    .testimonial {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold);
+      padding: 24px 20px;
+      margin-bottom: 12px;
+    }
+    .testimonial-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .author-avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--gold-dark);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: var(--cream);
+    }
+    .author-name { font-size: 0.85rem; font-weight: 500; }
+    .author-detail { font-size: 0.7rem; color: var(--cream-dim); }
+    .stars { color: var(--gold); font-size: 0.75rem; margin-bottom: 2px; }
+
+    /* ── FAQ ── */
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-q {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--cream);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 400;
+      text-align: left;
+      padding: 20px 0;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .faq-q .arrow {
+      color: var(--gold);
+      font-size: 1rem;
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+    }
+    .faq-q[aria-expanded="true"] .arrow { transform: rotate(180deg); }
+    .faq-a {
+      display: none;
+      padding-bottom: 20px;
+      font-size: 0.875rem;
+      color: var(--cream-dim);
+      line-height: 1.8;
+    }
+    .faq-a.open { display: block; }
+
+    /* ── BOOKING CTA ── */
+    .booking-section {
+      padding: 60px 24px;
+      text-align: center;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .booking-section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 7vw, 3rem);
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .booking-section h2 em { font-style: italic; color: var(--gold-light); }
+    .booking-section p { color: var(--cream-dim); margin-bottom: 28px; max-width: 320px; margin-left: auto; margin-right: auto; }
+    .contact-options {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 20px;
+      border: 1px solid var(--border);
+      color: var(--cream-dim);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      transition: border-color 0.3s, color 0.3s;
+    }
+    .contact-link:hover { border-color: var(--gold); color: var(--cream); }
+    .contact-link svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 32px 24px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    footer .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    footer p { font-size: 0.75rem; color: var(--cream-dim); margin-bottom: 6px; }
+    footer .links { margin-top: 16px; display: flex; justify-content: center; gap: 20px; }
+    footer .links a {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cream-dim);
+      text-decoration: none;
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── BOTTOM PADDING FOR STICKY CTA ── */
+    .bottom-pad { height: 80px; }
+  </style>
+</head>
+<body>
+
+  <!-- STICKY CTA -->
+  <div class="sticky-cta">
+    <a href="tel:+4951176371605" class="btn-secondary">Anrufen</a>
+    <a href="#termin" class="btn-primary">Termin buchen</a>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">HM Biovital</a>
+    <a href="index.html" class="nav-back">← Zurück</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-tag reveal">Diodenlaser · Hannover</div>
+    <h1 class="reveal">Für immer frei —<br><em>ohne Rasieren,<br>ohne Schmerzen.</em></h1>
+    <p class="hero-sub reveal">Dauerhafte Haarentfernung mit dem modernsten Diodenlaser. Sicher, schnell, nachhaltig.</p>
+    <a href="#termin" class="btn-gold reveal">Kostenlose Beratung sichern</a>
+    <p class="hero-trust reveal">Keine Verpflichtung · Kostenlos · In Hannover</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- STATS -->
+  <section class="section reveal">
+    <div class="stats-row">
+      <div class="stat">
+        <span class="stat-num">95%</span>
+        <span class="stat-label">dauerhaft haarfrei</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">6–8</span>
+        <span class="stat-label">Sitzungen genügen</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">10+</span>
+        <span class="stat-label">Körperzonen</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PROBLEM -->
+  <section class="section">
+    <p class="section-tag reveal">Das Problem</p>
+    <h2 class="reveal">Du kennst dieses <em>tägliche Ritual</em> — und bist es leid.</h2>
+    <p class="reveal">Rasieren, epilieren, wachsen. Immer wieder. Hautirritationen, eingewachsene Haare, der ewige Zeitaufwand. Es geht auch anders.</p>
+    <ul class="pain-list">
+      <li class="reveal">
+        <span class="pain-icon">✗</span>
+        Jede Woche rasieren — Hautreizungen und Schnitte inklusive
+      </li>
+      <li class="reveal">
+        <span class="pain-icon">✗</span>
+        Epilieren & Wachsen: schmerzhaft, teuer, nie wirklich dauerhaft
+      </li>
+      <li class="reveal">
+        <span class="pain-icon">✗</span>
+        Eingewachsene Haare und Rötungen, gerade in empfindlichen Zonen
+      </li>
+      <li class="reveal">
+        <span class="pain-icon">✗</span>
+        Kein spontaner Badeausflug — du bist nie wirklich vorbereitet
+      </li>
+    </ul>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SOLUTION -->
+  <section class="solution-bg section">
+    <p class="section-tag reveal">Die Lösung</p>
+    <h2 class="reveal"><em>Einmal behandeln</em> — ein Leben lang glatte Haut.</h2>
+
+    <div class="solution-visual reveal">
+      <div class="laser-icon">
+        <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="28" cy="28" r="27" stroke="#C49A3A" stroke-width="1"/>
+          <circle cx="28" cy="28" r="18" stroke="#C49A3A" stroke-width="0.5" stroke-dasharray="3 3"/>
+          <circle cx="28" cy="28" r="5" fill="#C49A3A"/>
+          <line x1="28" y1="4" x2="28" y2="16" stroke="#C49A3A" stroke-width="1.5"/>
+          <line x1="28" y1="40" x2="28" y2="52" stroke="#C49A3A" stroke-width="1.5"/>
+          <line x1="4" y1="28" x2="16" y2="28" stroke="#C49A3A" stroke-width="1.5"/>
+          <line x1="40" y1="28" x2="52" y2="28" stroke="#C49A3A" stroke-width="1.5"/>
+          <line x1="11" y1="11" x2="19" y2="19" stroke="#C49A3A" stroke-width="1"/>
+          <line x1="37" y1="37" x2="45" y2="45" stroke="#C49A3A" stroke-width="1"/>
+          <line x1="45" y1="11" x2="37" y2="19" stroke="#C49A3A" stroke-width="1"/>
+          <line x1="19" y1="37" x2="11" y2="45" stroke="#C49A3A" stroke-width="1"/>
+        </svg>
+        <span>Diodenlaser 808 nm</span>
+      </div>
+    </div>
+
+    <p class="reveal">Der Diodenlaser 808 nm gilt weltweit als Goldstandard für dauerhafte Haarentfernung. Das Laserlicht zielt präzise auf das Melanin der Haarwurzel – ohne das umliegende Gewebe zu belasten.</p>
+    <p class="reveal" style="margin-top: 12px;">Das Ergebnis: dauerhaft glatte Haut nach wenigen Sitzungen, für alle Hauttypen geeignet.</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- HOW IT WORKS -->
+  <section class="section">
+    <p class="section-tag reveal">Ablauf</p>
+    <h2 class="reveal">So läuft deine <em>Behandlung</em> ab</h2>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <h3>Kostenlose Erstberatung</h3>
+          <p>Wir analysieren deinen Hauttyp, deine Haarstruktur und erstellen deinen persönlichen Behandlungsplan – völlig unverbindlich.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <h3>Vorbereitung</h3>
+          <p>Die Zone wird rasiert und gereinigt. Eine kühlende Kontaktgel-Schicht schützt die Haut und sorgt für maximalen Komfort.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <h3>Laserbehandlung</h3>
+          <p>Der Laserimpuls trifft präzise die Haarwurzel. Je nach Zone dauert eine Sitzung 10–45 Minuten. Viele beschreiben das Gefühl wie ein leichtes Kribbeln.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <h3>Nachsorge & Folgetermine</h3>
+          <p>Wir geben dir eine Nachsorge-Anleitung mit. Nach 4–6 Wochen folgt die nächste Sitzung – bis du dauerhaft haarfrei bist.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- BENEFITS -->
+  <section class="section solution-bg">
+    <p class="section-tag reveal">Vorteile</p>
+    <h2 class="reveal">Warum Laser — und warum <em>HM Biovital?</em></h2>
+    <div class="benefits-grid">
+      <div class="benefit-card reveal">
+        <span class="icon">⚡</span>
+        <h4>Dauerhaft</h4>
+        <p>Bis zu 95% dauerhafter Haarreduktion nach der Behandlungsserie</p>
+      </div>
+      <div class="benefit-card reveal">
+        <span class="icon">🎯</span>
+        <h4>Präzise</h4>
+        <p>Nur die Haarwurzel wird getroffen – Haut & Umgebung bleiben unberührt</p>
+      </div>
+      <div class="benefit-card reveal">
+        <span class="icon">🌿</span>
+        <h4>Sanft</h4>
+        <p>Integriertes Kühlsystem sorgt für angenehme, schmerzarme Behandlung</p>
+      </div>
+      <div class="benefit-card reveal">
+        <span class="icon">✨</span>
+        <h4>Alle Typen</h4>
+        <p>Geeignet für helle bis dunkle Hauttypen und verschiedene Haartexturen</p>
+      </div>
+      <div class="benefit-card reveal">
+        <span class="icon">⏱</span>
+        <h4>Schnell</h4>
+        <p>Beine komplett in unter 45 Minuten – du sparst langfristig Stunden</p>
+      </div>
+      <div class="benefit-card reveal">
+        <span class="icon">🏆</span>
+        <h4>Erfahren</h4>
+        <p>Ausgebildetes Fachpersonal in Hannover – deine Haut in sicheren Händen</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PRICING -->
+  <section class="section" id="preise">
+    <p class="section-tag reveal">Preise</p>
+    <h2 class="reveal">Investiere einmal — genieße <em>ein Leben lang.</em></h2>
+    <p class="reveal" style="color: var(--cream-dim); margin-top: -8px; margin-bottom: 0;">Kostenlose Beratung · Keine Vorauszahlung · Faire Preise</p>
+
+    <div class="pricing-card reveal">
+      <h3>Kleine Zone</h3>
+      <p class="zone">Achseln · Bikinizone · Oberlippe · Kinn</p>
+      <div class="price-display">
+        <span class="price-amount">ab 49 €</span>
+        <span class="price-old">79 €</span>
+      </div>
+      <p class="price-note">pro Sitzung · Paketrabatt verfügbar</p>
+      <ul class="pricing-list">
+        <li>Behandlung mit Diodenlaser 808 nm</li>
+        <li>Kühlsystem für maximalen Komfort</li>
+        <li>Beratungsgespräch inklusive</li>
+        <li>Nachsorgeanleitung inklusive</li>
+      </ul>
+      <a href="#termin" class="btn-outline">Beratung anfragen</a>
+    </div>
+
+    <div class="pricing-card featured reveal">
+      <div class="pricing-badge">Beliebt</div>
+      <h3>Mittlere Zone</h3>
+      <p class="zone">Unterschenkel · Unterarme · Rückenpartien</p>
+      <div class="price-display">
+        <span class="price-amount">ab 89 €</span>
+        <span class="price-old">139 €</span>
+      </div>
+      <p class="price-note">pro Sitzung · Paketrabatt verfügbar</p>
+      <ul class="pricing-list">
+        <li>Behandlung mit Diodenlaser 808 nm</li>
+        <li>Kühlsystem für maximalen Komfort</li>
+        <li>Beratungsgespräch inklusive</li>
+        <li>Nachsorgeanleitung inklusive</li>
+        <li>Fortschrittsprotokoll</li>
+      </ul>
+      <a href="#termin" class="btn-gold-block">Jetzt Termin buchen</a>
+    </div>
+
+    <div class="pricing-card reveal">
+      <h3>Große Zone</h3>
+      <p class="zone">Ganzer Rücken · Beine komplett · Ganzkörper</p>
+      <div class="price-display">
+        <span class="price-amount">ab 149 €</span>
+        <span class="price-old">229 €</span>
+      </div>
+      <p class="price-note">pro Sitzung · Paketrabatt verfügbar</p>
+      <ul class="pricing-list">
+        <li>Behandlung mit Diodenlaser 808 nm</li>
+        <li>Kühlsystem für maximalen Komfort</li>
+        <li>Beratungsgespräch inklusive</li>
+        <li>Nachsorgeanleitung inklusive</li>
+        <li>Fortschrittsprotokoll</li>
+        <li>Persönliches Sitzungspaket</li>
+      </ul>
+      <a href="#termin" class="btn-outline">Beratung anfragen</a>
+    </div>
+
+    <p class="reveal" style="font-size: 0.75rem; color: var(--cream-dim); margin-top: 16px; text-align: center;">Alle Preise inkl. Beratung. Individuelle Pakete für mehrere Sitzungen auf Anfrage.</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- TESTIMONIALS -->
+  <section class="section solution-bg">
+    <p class="section-tag reveal">Erfahrungen</p>
+    <h2 class="reveal">Was unsere <em>Kundinnen</em> sagen</h2>
+
+    <div style="margin-top: 28px;">
+      <div class="testimonial reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">„Nach 6 Sitzungen bin ich fast komplett haarfrei an den Beinen. Das war die beste Investition, die ich je gemacht habe. Kein tägliches Rasieren mehr!"</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">S</div>
+          <div>
+            <div class="author-name">Sarah M.</div>
+            <div class="author-detail">Behandlung: Beine · 7 Sitzungen</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">„Ich war skeptisch, aber das Team hat mich vom ersten Termin an super beraten. Die Behandlung war nahezu schmerzlos und das Ergebnis spricht für sich."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">L</div>
+          <div>
+            <div class="author-name">Laura K.</div>
+            <div class="author-detail">Behandlung: Achseln & Bikini · 5 Sitzungen</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">„Super professionelles Institut in Hannover. Angenehme Atmosphäre, kompetente Beratung. Ich komme jetzt regelmäßig für verschiedene Behandlungen."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">M</div>
+          <div>
+            <div class="author-name">Maria T.</div>
+            <div class="author-detail">Behandlung: Ganzkörper · Stammkundin</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- FAQ -->
+  <section class="section">
+    <p class="section-tag reveal">FAQ</p>
+    <h2 class="reveal">Deine <em>Fragen</em> — unsere Antworten</h2>
+    <div style="margin-top: 28px;">
+
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">
+          Ist die Behandlung schmerzhaft?
+          <span class="arrow">▾</span>
+        </button>
+        <div class="faq-a">Die meisten Kundinnen beschreiben das Gefühl als leichtes Kribbeln oder Wärme. Unser Diodenlaser verfügt über ein integriertes Kühlsystem, das die Behandlung deutlich angenehmer macht als ältere Methoden.</div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">
+          Wie viele Sitzungen sind nötig?
+          <span class="arrow">▾</span>
+        </button>
+        <div class="faq-a">In der Regel sind 6–8 Sitzungen für eine dauerhafte Reduktion notwendig. Das variiert je nach Zone, Hauttyp und Haarstruktur. Im Erstgespräch erstellen wir deinen individuellen Plan.</div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">
+          Für welche Haut- und Haartypen geeignet?
+          <span class="arrow">▾</span>
+        </button>
+        <div class="faq-a">Der Diodenlaser 808 nm ist für helle bis dunkle Hauttypen (Fitzpatrick I–VI) geeignet. Am effektivsten bei dunklen Haaren auf hellem Hautton, aber auch bei anderen Kombinationen sehr wirksam.</div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">
+          Was muss ich vor der Behandlung beachten?
+          <span class="arrow">▾</span>
+        </button>
+        <div class="faq-a">Die zu behandelnde Zone sollte 24 Stunden vorher rasiert, aber nicht gewachst oder epiliert sein. Kein Selbstbräuner auf der Haut. Intensive Sonneneinstrahlung 2 Wochen vorher vermeiden.</div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">
+          Gibt es Ausfallzeiten nach der Behandlung?
+          <span class="arrow">▾</span>
+        </button>
+        <div class="faq-a">In der Regel keine. Leichte Rötungen für 1–2 Stunden sind normal. Du kannst direkt nach der Behandlung deinen Alltag fortführen. Direkte Sonneneinstrahlung solltest du 48 Stunden danach meiden.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- BOOKING CTA -->
+  <section class="booking-section" id="termin">
+    <p class="section-tag reveal">Nächster Schritt</p>
+    <h2 class="reveal">Dein erster Schritt zu <em>dauerhaft glatter Haut</em></h2>
+    <p class="reveal">Sichere dir deine kostenlose Erstberatung. Wir analysieren deine Haut und erstellen deinen persönlichen Behandlungsplan.</p>
+
+    <a href="#termin" class="btn-gold reveal" style="margin-bottom: 8px;">Jetzt Termin anfragen</a>
+
+    <div class="contact-options">
+      <a href="tel:+4951176371605" class="contact-link reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.25 1.14 2 2 0 012.24.13h3a2 2 0 012 1.72c.13 1 .38 1.98.74 2.9a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.16 6.16l1.15-1.14a2 2 0 012.11-.45c.92.36 1.9.61 2.9.74a2 2 0 011.77 2.1z"/>
+        </svg>
+        +49 511 76371605
+      </a>
+      <a href="mailto:info@hm-biovital.de" class="contact-link reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+          <polyline points="22,6 12,13 2,6"/>
+        </svg>
+        info@hm-biovital.de
+      </a>
+      <a href="https://maps.google.com/?q=Herrenhäuser+Straße+76A,+30419+Hannover" target="_blank" rel="noopener" class="contact-link reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+          <circle cx="12" cy="10" r="3"/>
+        </svg>
+        Herrenhäuser Str. 76A, Hannover
+      </a>
+    </div>
+
+    <p class="reveal" style="font-size: 0.75rem; color: var(--cream-dim); margin-top: 20px;">
+      Öffnungszeiten: Mo–Di, Do–Fr 10–19 Uhr · Mi 13–19 Uhr · Sa 10–16 Uhr
+    </p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="logo">HM Biovital</p>
+    <p>Kosmetikinstitut Hannover</p>
+    <p>Herrenhäuser Straße 76A · 30419 Hannover</p>
+    <div class="links">
+      <a href="index.html">Startseite</a>
+      <a href="impressum.html">Impressum</a>
+    </div>
+  </footer>
+
+  <div class="bottom-pad"></div>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 40);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-q').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', !expanded);
+        btn.nextElementSibling.classList.toggle('open', !expanded);
+      });
+    });
+  </script>
+
+</body>
+</html>

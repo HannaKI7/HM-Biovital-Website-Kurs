@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vielen Dank! – HM BIOVITAL</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- ================================================
+       TRACKING PLATZHALTER
+       Google Ads Conversion Tag: hier einfügen (Lead-Conversion-Event)
+       Meta Pixel: hier einfügen (Lead-Event)
+       Beispiel Meta Pixel Lead-Event:
+       <script>fbq('track', 'Lead');<\/script>
+  ================================================= -->
+
+  <!-- Google Fonts: lokal eingebunden, kein Verbindungsaufbau zu Google-Servern -->
+  <link rel="stylesheet" href="fonts/fonts.css">
+
+  <style>
+    /* ======================================================
+       RESET & CSS VARIABLES
+    ====================================================== */
+    *, *::before, *::after {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+
+    :root {
+      --bg:          #08090A;
+      --bg2:         #0E1012;
+      --bg3:         #141618;
+      --gold:        #C49A3A;
+      --gold-light:  #E2B96A;
+      --gold-dark:   #8B6220;
+      --cream:       #FFFFFF;
+      --cream-60:    rgba(255,255,255,0.65);
+      --cream-30:    rgba(255,255,255,0.42);
+      --border:      rgba(196,154,58,0.18);
+      --border-h:    rgba(196,154,58,0.42);
+      --display:     'Cormorant Garamond', serif;
+      --body:        'Jost', sans-serif;
+      --ease:        cubic-bezier(0.23,1,0.32,1);
+    }
+
+    html { font-size: 16px; }
+
+    body {
+      background: var(--bg);
+      color: var(--cream);
+      font-family: var(--body);
+      font-weight: 300;
+      overflow-x: hidden;
+      cursor: none;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    img { display: block; max-width: 100%; }
+    a   { color: inherit; text-decoration: none; }
+
+    /* ======================================================
+       CUSTOM CURSOR
+    ====================================================== */
+    .c-dot {
+      position: fixed; width: 8px; height: 8px;
+      background: var(--gold); border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%,-50%);
+      transition: width .2s, height .2s, background .2s, opacity .3s;
+    }
+    .c-ring {
+      position: fixed; width: 38px; height: 38px;
+      border: 1px solid rgba(196,154,58,.45); border-radius: 50%;
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%,-50%);
+      transition: width .35s var(--ease), height .35s var(--ease), border-color .3s, opacity .3s;
+    }
+    body.ch .c-dot  { width: 12px; height: 12px; background: var(--gold-light); }
+    body.ch .c-ring { width: 58px; height: 58px; border-color: rgba(226,185,106,.6); }
+    body.cl .c-dot  { opacity: 0; }
+    body.cl .c-ring { opacity: 0; }
+
+    /* ======================================================
+       KEYFRAMES
+    ====================================================== */
+    @keyframes revUp    { to { opacity:1; transform:none; } }
+    @keyframes checkPop { 0%{transform:scale(0) rotate(-20deg);opacity:0} 70%{transform:scale(1.15) rotate(4deg)} 100%{transform:scale(1) rotate(0);opacity:1} }
+    @keyframes ringPulse { 0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.4} 50%{transform:translate(-50%,-50%) scale(1.25);opacity:0} }
+
+    /* ======================================================
+       SCROLL REVEAL
+    ====================================================== */
+    .rv {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity .85s var(--ease), transform .85s var(--ease);
+    }
+    .rv.on  { opacity: 1; transform: none; }
+    .rv.d1  { transition-delay: .12s; }
+    .rv.d2  { transition-delay: .24s; }
+    .rv.d3  { transition-delay: .36s; }
+    .rv.d4  { transition-delay: .50s; }
+
+    /* ======================================================
+       HEADER
+    ====================================================== */
+    .funnel-header {
+      padding: 32px 24px;
+      display: flex; justify-content: center; align-items: center;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .logo-link {
+      text-decoration: none; display: flex; flex-direction: column;
+      align-items: center; line-height: 1;
+    }
+    .logo-main {
+      font-family: var(--display); font-size: 1.55rem;
+      letter-spacing: .32em; color: var(--cream); font-weight: 300;
+    }
+    .logo-sub {
+      font-family: var(--body); font-size: .52rem;
+      letter-spacing: .42em; color: var(--gold); font-weight: 400;
+      text-transform: uppercase; margin-top: 4px;
+    }
+
+    /* ======================================================
+       MAIN CONTENT
+    ====================================================== */
+    main {
+      flex: 1;
+      display: flex; align-items: center; justify-content: center;
+      padding: 64px 24px;
+    }
+
+    .danke-inner {
+      max-width: 640px; width: 100%; text-align: center;
+    }
+
+    /* Check Icon */
+    .check-wrap {
+      position: relative; width: 88px; height: 88px;
+      margin: 0 auto 40px;
+    }
+    .check-ring {
+      position: absolute; inset: 0; border-radius: 50%;
+      border: 1px solid rgba(196,154,58,0.4);
+      animation: ringPulse 2.4s 1.2s ease-in-out infinite;
+    }
+    .check-circle {
+      width: 88px; height: 88px; border-radius: 50%;
+      background: rgba(196,154,58,0.12);
+      border: 1px solid rgba(196,154,58,0.5);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0;
+      animation: checkPop .6s .3s var(--ease) forwards;
+    }
+    .check-circle svg {
+      width: 36px; height: 36px; color: var(--gold);
+    }
+
+    .danke-eyebrow {
+      display: inline-flex; align-items: center; gap: 12px;
+      margin-bottom: 20px;
+      opacity: 0; transform: translateY(14px);
+      animation: revUp .6s .7s var(--ease) forwards;
+    }
+    .danke-eyebrow-bar { width: 24px; height: 1px; background: var(--gold); }
+    .danke-eyebrow-txt {
+      font-size: .6rem; letter-spacing: .38em; text-transform: uppercase;
+      color: var(--gold); font-weight: 400;
+    }
+
+    .danke-headline {
+      font-family: var(--display); font-weight: 300;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      line-height: 1.1; color: var(--cream);
+      margin-bottom: 20px;
+      opacity: 0; transform: translateY(18px);
+      animation: revUp .7s .85s var(--ease) forwards;
+    }
+    .danke-headline em {
+      font-style: italic; color: var(--gold-light);
+    }
+
+    .danke-text {
+      font-size: .92rem; line-height: 1.82; color: var(--cream-60);
+      margin-bottom: 52px; max-width: 480px; margin-left: auto; margin-right: auto;
+      opacity: 0; transform: translateY(14px);
+      animation: revUp .7s 1.05s var(--ease) forwards;
+    }
+
+    /* ======================================================
+       STEP INDICATOR
+    ====================================================== */
+    .steps {
+      display: flex; align-items: center; justify-content: center;
+      gap: 0; margin-bottom: 52px;
+      opacity: 0; transform: translateY(14px);
+      animation: revUp .7s 1.2s var(--ease) forwards;
+    }
+    .step {
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+      flex: 0 0 auto;
+    }
+    .step-bubble {
+      width: 44px; height: 44px; border-radius: 50%;
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .72rem; font-weight: 400; letter-spacing: .06em;
+      color: var(--cream-30);
+      transition: background .3s, border-color .3s, color .3s;
+    }
+    .step.done .step-bubble {
+      background: rgba(196,154,58,0.15);
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+    .step.active .step-bubble {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--bg);
+      font-weight: 500;
+    }
+    .step-label {
+      font-size: .64rem; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--cream-30); font-weight: 400; white-space: nowrap;
+    }
+    .step.done .step-label,
+    .step.active .step-label { color: var(--cream-60); }
+
+    .step-line {
+      flex: 1; max-width: 80px; height: 1px;
+      background: var(--border); margin-bottom: 26px;
+    }
+    .step-line.done { background: rgba(196,154,58,0.5); }
+
+    /* ======================================================
+       CTA SECTION
+    ====================================================== */
+    .danke-cta {
+      display: flex; flex-direction: column; align-items: center; gap: 20px;
+      opacity: 0; transform: translateY(14px);
+      animation: revUp .7s 1.4s var(--ease) forwards;
+    }
+
+    .spam-note {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      padding: 16px 24px;
+      font-size: .8rem; color: var(--cream-60); line-height: 1.65;
+      max-width: 420px; text-align: center;
+    }
+    .spam-note strong { color: var(--gold); font-weight: 400; }
+
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      text-decoration: none; color: var(--cream-60);
+      font-size: .68rem; letter-spacing: .22em; text-transform: uppercase;
+      font-weight: 400; padding: 14px 0;
+      border-bottom: 1px solid transparent;
+      transition: color .3s, border-color .3s, gap .3s;
+    }
+    .btn-ghost:hover { color: var(--cream); border-color: var(--border); gap: 14px; }
+
+    /* ======================================================
+       FOOTER
+    ====================================================== */
+    .funnel-footer {
+      border-top: 1px solid var(--border);
+      padding: 24px;
+      text-align: center;
+      display: flex; justify-content: center; align-items: center;
+      gap: 24px; flex-wrap: wrap;
+      flex-shrink: 0;
+    }
+    .funnel-footer a, .funnel-footer span {
+      font-size: .68rem; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--cream-30); transition: color .3s;
+    }
+    .funnel-footer a:hover { color: var(--gold); }
+    .funnel-footer .ft-sep {
+      width: 1px; height: 12px; background: var(--border);
+    }
+
+    /* ======================================================
+       RESPONSIVE
+    ====================================================== */
+    @media (max-width: 500px) {
+      .step-line { max-width: 40px; }
+      .step-label { font-size: .58rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="c-dot" id="cDot"></div>
+<div class="c-ring" id="cRing"></div>
+
+<!-- ══════════════════════════════════════
+     HEADER
+════════════════════════════════════════ -->
+<header class="funnel-header">
+  <a href="index.html" class="logo-link">
+    <span class="logo-main">HM BIOVITAL</span>
+    <span class="logo-sub">Kosmetikinstitut Hannover</span>
+  </a>
+</header>
+
+<!-- ══════════════════════════════════════
+     MAIN CONTENT
+════════════════════════════════════════ -->
+<main>
+  <div class="danke-inner">
+
+    <!-- Check Icon -->
+    <div class="check-wrap">
+      <div class="check-ring"></div>
+      <div class="check-circle">
+        <svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="6,18 14,26 30,10"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Eyebrow -->
+    <div class="danke-eyebrow">
+      <span class="danke-eyebrow-bar"></span>
+      <span class="danke-eyebrow-txt">Fast geschafft</span>
+      <span class="danke-eyebrow-bar"></span>
+    </div>
+
+    <!-- Headline -->
+    <h1 class="danke-headline">
+      Vielen Dank –<br><em>fast geschafft!</em>
+    </h1>
+
+    <!-- Text -->
+    <p class="danke-text">
+      Wir haben dir soeben eine E-Mail geschickt.<br>
+      Bitte öffne sie und klicke auf den Bestätigungslink –
+      danach erhältst du deinen kostenlosen Ratgeber.
+    </p>
+
+    <!-- Step Indicator -->
+    <div class="steps">
+      <div class="step done">
+        <div class="step-bubble">✓</div>
+        <span class="step-label">Angemeldet</span>
+      </div>
+      <div class="step-line done"></div>
+      <div class="step active">
+        <div class="step-bubble">2</div>
+        <span class="step-label">E-Mail prüfen</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step">
+        <div class="step-bubble">3</div>
+        <span class="step-label">Download</span>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="danke-cta">
+      <div class="spam-note">
+        <strong>Keine E-Mail erhalten?</strong><br>
+        Bitte prüfe auch deinen Spam- oder Werbeordner.
+        Manchmal landet unsere E-Mail dort – einfach als „kein Spam" markieren.
+      </div>
+      <a href="index.html" class="btn-ghost">
+        Zurück zur Website →
+      </a>
+    </div>
+
+  </div>
+</main>
+
+<!-- ══════════════════════════════════════
+     FOOTER
+════════════════════════════════════════ -->
+<footer class="funnel-footer">
+  <span>© 2026 HM Biovital · Hannover</span>
+  <span class="ft-sep"></span>
+  <a href="impressum.html#impressum">Impressum</a>
+  <span class="ft-sep"></span>
+  <a href="impressum.html#datenschutz">Datenschutz</a>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ── CUSTOM CURSOR ──────────────────────────────────────── */
+  var dot  = document.getElementById('cDot');
+  var ring = document.getElementById('cRing');
+  var mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', function (e) {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx + 'px';
+    dot.style.top  = my + 'px';
+  });
+
+  document.addEventListener('mouseleave', function () { document.body.classList.add('cl'); });
+  document.addEventListener('mouseenter', function () { document.body.classList.remove('cl'); });
+
+  (function animRing() {
+    rx += (mx - rx) * 0.11;
+    ry += (my - ry) * 0.11;
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+    requestAnimationFrame(animRing);
+  })();
+
+  document.querySelectorAll('a, button').forEach(function (el) {
+    el.addEventListener('mouseenter', function () { document.body.classList.add('ch'); });
+    el.addEventListener('mouseleave', function () { document.body.classList.remove('ch'); });
+  });
+
+  /* ── SCROLL REVEAL ──────────────────────────────────────── */
+  var rvEls = document.querySelectorAll('.rv');
+  if ('IntersectionObserver' in window) {
+    var rvObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('on'); }
+      });
+    }, { threshold: 0.1 });
+    rvEls.forEach(function (el) { rvObs.observe(el); });
+  } else {
+    rvEls.forEach(function (el) { el.classList.add('on'); });
+  }
+
+})();
+</script>
+</body>
+</html>
